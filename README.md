@@ -1,0 +1,2 @@
+# Final_project_202218020208_lighweight_pneumothorax_detection
+Lightweight Pneumothorax Detection from Chest X-rays with Calibration-Aware Inference
