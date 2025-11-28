@@ -1,0 +1,2 @@
+Total rows: 10675
+Missing files: 0
