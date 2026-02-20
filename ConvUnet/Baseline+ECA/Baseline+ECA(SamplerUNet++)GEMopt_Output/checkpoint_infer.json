@@ -1,0 +1,25 @@
+{
+  "in_chans": 1,
+  "n_classes": 1,
+  "drop_path_rate": 0.1,
+  "use_seg_guided": false,
+  "img_size": 576,
+  "mean": [
+    0.5
+  ],
+  "std": [
+    0.25
+  ],
+  "mode": "L",
+  "temperature_T": 0.8587129712104797,
+  "cls_threshold": 0.37,
+  "mask_threshold": 0.5,
+  "cls_sigmoid": true,
+  "seg_sigmoid": true,
+  "seed": 42,
+  "monitor": "pr_auc",
+  "best_epoch": 44,
+  "best_score": 0.8083324881947749,
+  "saved_time": "2026-02-20 00:38:41",
+  "torch_version": "2.9.0.dev20250716+cu128"
+}
