@@ -1,0 +1,122 @@
+{
+  "image_path": "C:\\Users\\Steven\\Desktop\\Final Project\\Datasets\\Dataset_2\\pneumothorax_normal_balanced_images\\00000013_039.png",
+  "payload": {
+    "task": "pneumothorax_binary_classification",
+    "prediction": {
+      "p_calibrated": 0.9601128697395325,
+      "y_pred": 1,
+      "threshold": 0.37,
+      "temperature_T": 0.8587129712104797
+    },
+    "image_rag": {
+      "topk": 5,
+      "retrieved_case_ids": [
+        "1.2.276.0.7230010.3.1.4.8323329.388.1517875162.713279",
+        "1.2.276.0.7230010.3.1.4.8323329.583.1517875163.545784",
+        "1.2.276.0.7230010.3.1.4.8323329.10287.1517875222.997107",
+        "1.2.276.0.7230010.3.1.4.8323329.5657.1517875189.357044",
+        "1.2.276.0.7230010.3.1.4.8323329.31941.1517875157.590337"
+      ],
+      "similar_cases": [
+        {
+          "case_id": "1.2.276.0.7230010.3.1.4.8323329.388.1517875162.713279",
+          "sim": 0.041716985404491425,
+          "p_calibrated": 0.7268940806388855,
+          "y_pred": 1
+        },
+        {
+          "case_id": "1.2.276.0.7230010.3.1.4.8323329.583.1517875163.545784",
+          "sim": 0.03639635071158409,
+          "p_calibrated": 0.6400302052497864,
+          "y_pred": 1
+        },
+        {
+          "case_id": "1.2.276.0.7230010.3.1.4.8323329.10287.1517875222.997107",
+          "sim": 0.035684313625097275,
+          "p_calibrated": 0.6419541835784912,
+          "y_pred": 1
+        },
+        {
+          "case_id": "1.2.276.0.7230010.3.1.4.8323329.5657.1517875189.357044",
+          "sim": 0.03505326434969902,
+          "p_calibrated": 0.6228746771812439,
+          "y_pred": 1
+        },
+        {
+          "case_id": "1.2.276.0.7230010.3.1.4.8323329.31941.1517875157.590337",
+          "sim": 0.03446101397275925,
+          "p_calibrated": 0.6506711840629578,
+          "y_pred": 1
+        }
+      ]
+    },
+    "text_rag": {
+      "query": "high confidence classification template; limitations; logging schema; retrieval interpretation",
+      "topk": 6,
+      "evidence_chunks": [
+        {
+          "chunk_id": "KB_007",
+          "tags": [
+            "template",
+            "indeterminate"
+          ],
+          "text": "Template (indeterminate): The classifier confidence is borderline around the decision threshold. Treat the result as indeterminate; prioritise human review and consider additional information (clinical context and image quality) before relying on the output.",
+          "sim": 0.5211179256439209
+        },
+        {
+          "chunk_id": "KB_036",
+          "tags": [
+            "engineering",
+            "versioning"
+          ],
+          "text": "Versioning: Record model architecture name, checkpoint hash, preprocessing parameters, calibration temperature, decision threshold, and retrieval index version for each generated report.",
+          "sim": 0.43723276257514954
+        },
+        {
+          "chunk_id": "KB_011",
+          "tags": [
+            "confidence",
+            "low",
+            "borderline"
+          ],
+          "text": "Low confidence wording: 'The model output is borderline near the decision threshold; treat as indeterminate and do not over-interpret.'",
+          "sim": 0.4335254430770874
+        },
+        {
+          "chunk_id": "KB_019",
+          "tags": [
+            "limitations",
+            "dataset_bias"
+          ],
+          "text": "Limitation: Training data label noise, class imbalance, and sampling choices can bias probabilities and decision thresholds. Report key dataset design decisions in system metadata.",
+          "sim": 0.4166795611381531
+        },
+        {
+          "chunk_id": "KB_022",
+          "tags": [
+            "actions",
+            "documentation"
+          ],
+          "text": "Documentation: Always include model version, threshold, calibration parameter(s), and retrieval configuration in logs to ensure reproducibility and auditability.",
+          "sim": 0.4107998013496399
+        },
+        {
+          "chunk_id": "KB_041",
+          "tags": [
+            "template",
+            "limitations_block"
+          ],
+          "text": "Limitations block template: 'Binary classification only; no localisation or severity; performance may vary with acquisition and domain shift; outputs require human review and clinical correlation.'",
+          "sim": 0.4089149832725525
+        }
+      ]
+    },
+    "overlay": {
+      "path": "C:\\Users\\Steven\\Desktop\\Final_project_202218020208_lighweight_pneumothorax_detection\\RAG+LLM\\reports\\overlays\\00000013_039_20260302_232436_overlay.png",
+      "filename": "00000013_039_20260302_232436_overlay.png"
+    }
+  },
+  "report": {
+    "diagnostic_report": "Clinical context: Not provided. Technique: Analysis performed on a single frontal chest radiograph. Findings: The analysis indicates findings consistent with a pneumothorax. Specific localisation, size, and assessment for tension are not available from this output. Impression: Findings are consistent with a pneumothorax. Recommendations: Urgent radiologist review is required. Clinical correlation is essential. Further imaging, such as expiratory or lateral decubitus views, or CT chest, may be considered if clinically indicated to confirm the diagnosis and assess extent. Limitations: This is a binary classification output only. It does not provide localisation, quantification of size, or assessment for tension pneumothorax. Performance may vary with image acquisition parameters and patient population. This output must not be used for clinical decision-making without expert human review and integration with the full clinical picture. See attached overlay image: 00000013_039_20260302_232436_overlay.png."
+  }
+}
