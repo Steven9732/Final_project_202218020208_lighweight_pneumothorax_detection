@@ -1,0 +1,126 @@
+{
+  "image_path": "C:\\Users\\Steven\\Desktop\\Final Project\\Datasets\\Dataset_2\\pneumothorax_normal_balanced_images\\00000013_011.png",
+  "payload": {
+    "task": "pneumothorax_binary_classification",
+    "prediction": {
+      "p_calibrated": 0.9428542256355286,
+      "y_pred": 1,
+      "threshold": 0.37,
+      "temperature_T": 0.8587129712104797
+    },
+    "report_constraints": {
+      "allow_localization": false,
+      "allow_laterality": false,
+      "allow_size": false,
+      "allow_extent": false,
+      "allow_tension": false,
+      "allow_specific_imaging_signs": false
+    },
+    "image_rag": {
+      "topk": 5,
+      "summary": {
+        "num_cases": 5,
+        "mean_similarity": 0.03361007496714592,
+        "retrieved_pred_positive_rate": 1.0
+      },
+      "retrieved_case_ids": [
+        "1.2.276.0.7230010.3.1.4.8323329.388.1517875162.713279",
+        "1.2.276.0.7230010.3.1.4.8323329.5657.1517875189.357044",
+        "1.2.276.0.7230010.3.1.4.8323329.10287.1517875222.997107",
+        "1.2.276.0.7230010.3.1.4.8323329.10044.1517875221.721779",
+        "1.2.276.0.7230010.3.1.4.8323329.583.1517875163.545784"
+      ]
+    },
+    "text_rag": {
+      "query": "pneumothorax report wording for high-confidence binary output; safe impression wording; limitation statement; binary classification only; no localization no size no tension; radiologist review and clinical correlation",
+      "topk": 6,
+      "evidence_chunks": [
+        {
+          "chunk_id": "KB_049",
+          "tags": [
+            "template",
+            "positive_brief"
+          ],
+          "text": "Brief positive: 'Suggestive of pneumothorax (classification-only). Confirm by human review; no localisation/severity is provided.'",
+          "sim": 0.8314810991287231
+        },
+        {
+          "chunk_id": "KB_005",
+          "tags": [
+            "template",
+            "positive"
+          ],
+          "text": "Template (positive): The classifier output is suggestive of pneumothorax (binary classification). This result provides no localisation or severity assessment. Human review and clinical correlation are required.",
+          "sim": 0.7951235175132751
+        },
+        {
+          "chunk_id": "KB_009",
+          "tags": [
+            "confidence",
+            "high"
+          ],
+          "text": "High confidence wording: 'The model output is strongly suggestive of / strongly not suggestive of pneumothorax based on a calibrated probability far from the threshold.' Avoid adding any imaging descriptors.",
+          "sim": 0.790618896484375
+        },
+        {
+          "chunk_id": "KB_050",
+          "tags": [
+            "template",
+            "negative_brief"
+          ],
+          "text": "Brief negative: 'Not suggestive of pneumothorax (classification-only). Human review and clinical correlation are required; false negatives can occur.'",
+          "sim": 0.7799427509307861
+        },
+        {
+          "chunk_id": "KB_030",
+          "tags": [
+            "reporting",
+            "false_positives"
+          ],
+          "text": "Caution about false positives: A positive prediction can occur in non-pneumothorax cases; therefore, avoid escalation language and rely on human review and context.",
+          "sim": 0.7687244415283203
+        },
+        {
+          "chunk_id": "KB_001",
+          "tags": [
+            "scope",
+            "task"
+          ],
+          "text": "Scope: This system provides research-only decision support for pneumothorax binary classification from chest X-ray images. Outputs must be limited to class probability, threshold-based label, and uncertainty/limitations. It must not be used as a standalone diagnostic tool.",
+          "sim": 0.7658782601356506
+        }
+      ]
+    },
+    "visual_support": {
+      "overlay_available": true,
+      "overlay_path": "C:\\Users\\Steven\\Desktop\\Final_project_202218020208_lighweight_pneumothorax_detection\\RAG+LLM\\reports\\overlays\\00000013_011_20260307_125748_overlay.png",
+      "overlay_filename": "00000013_011_20260307_125748_overlay.png",
+      "overlay_note": "An accompanying visual overlay highlights the model-identified region of interest for review."
+    }
+  },
+  "report": {
+    "diagnostic_report": "Clinical context: Chest radiograph submitted for pneumothorax screening.\nTechnique: Frontal chest radiograph.\nFindings: The automated screening output is strongly suggestive of pneumothorax based on binary classification. No assessment of localization, laterality, size, extent, or tension physiology is available from this output.\nImpression: Suggestive of pneumothorax (classification-only).\nRecommendations: This output requires confirmation by human radiologist review and clinical correlation. No localisation or severity assessment is provided.\nLimitations: This is a research-only decision support tool for binary classification. A positive prediction can occur in non-pneumothorax cases. The output must not be used as a standalone diagnostic tool.",
+    "evidence": {
+      "text_chunk_ids": [
+        "KB_049",
+        "KB_005",
+        "KB_009",
+        "KB_030",
+        "KB_001"
+      ],
+      "retrieved_case_ids": [
+        "1.2.276.0.7230010.3.1.4.8323329.388.1517875162.713279",
+        "1.2.276.0.7230010.3.1.4.8323329.5657.1517875189.357044",
+        "1.2.276.0.7230010.3.1.4.8323329.10287.1517875222.997107",
+        "1.2.276.0.7230010.3.1.4.8323329.10044.1517875221.721779",
+        "1.2.276.0.7230010.3.1.4.8323329.583.1517875163.545784"
+      ]
+    },
+    "visual_support": {
+      "overlay_available": true,
+      "overlay_path": "C:\\Users\\Steven\\Desktop\\Final_project_202218020208_lighweight_pneumothorax_detection\\RAG+LLM\\reports\\overlays\\00000013_011_20260307_125748_overlay.png",
+      "overlay_filename": "00000013_011_20260307_125748_overlay.png",
+      "overlay_note": "An accompanying visual overlay highlights the model-identified region of interest for review."
+    }
+  }
+}
