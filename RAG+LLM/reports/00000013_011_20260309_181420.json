@@ -1,0 +1,162 @@
+{
+  "image_path": "C:\\Users\\Steven\\Desktop\\Final Project\\Datasets\\Dataset_2\\pneumothorax_normal_balanced_images\\00000013_011.png",
+  "payload": {
+    "task": "pneumothorax_binary_classification",
+    "prediction": {
+      "p_calibrated": 0.9428542256355286,
+      "y_pred": 1,
+      "threshold": 0.37,
+      "temperature_T": 0.8587129712104797,
+      "confidence_band": "high",
+      "narrative_label": "positive"
+    },
+    "report_constraints": {
+      "allow_localization": false,
+      "allow_laterality": false,
+      "allow_size": false,
+      "allow_extent": false,
+      "allow_tension": false,
+      "allow_specific_imaging_signs": false
+    },
+    "image_rag": {
+      "topk": 5,
+      "summary": {
+        "num_cases": 5,
+        "mean_similarity": 0.03361007496714592,
+        "retrieved_pred_positive_rate": 1.0
+      },
+      "behaviour_context": {
+        "num_cases": 5,
+        "mean_similarity": 0.03361007496714592,
+        "agreement_rate": 1.0,
+        "retrieval_state": "agreement",
+        "low_similarity": true
+      },
+      "retrieved_case_ids": [
+        "1.2.276.0.7230010.3.1.4.8323329.388.1517875162.713279",
+        "1.2.276.0.7230010.3.1.4.8323329.5657.1517875189.357044",
+        "1.2.276.0.7230010.3.1.4.8323329.10287.1517875222.997107",
+        "1.2.276.0.7230010.3.1.4.8323329.10044.1517875221.721779",
+        "1.2.276.0.7230010.3.1.4.8323329.583.1517875163.545784"
+      ]
+    },
+    "text_rag": {
+      "query": "pneumothorax automated report wording; positive output; high confidence; retrieval agreement; low similarity context; findings impression recommendations limitations; classification-only; no laterality no localization no size no extent no tension; safe concise professional wording",
+      "scenario": {
+        "polarity": "positive",
+        "confidence": "high",
+        "narrative_label": "positive",
+        "retrieval_state": "agreement",
+        "low_similarity": true
+      },
+      "topk": 6,
+      "evidence_chunks": [
+        {
+          "chunk_id": "KB_061",
+          "tags": [
+            "report_use",
+            "template",
+            "positive",
+            "high",
+            "findings"
+          ],
+          "text": "Findings wording for high-confidence positive output: automated screening findings are suggestive of pneumothorax. Do not add laterality, localisation, size, or tension descriptors.",
+          "sim": 0.7852387428283691,
+          "score": 1.1152387428283692
+        },
+        {
+          "chunk_id": "KB_070",
+          "tags": [
+            "report_use",
+            "impression",
+            "positive",
+            "high"
+          ],
+          "text": "Impression wording for high-confidence positive output: impression is suggestive of pneumothorax on automated screening, pending qualified human review.",
+          "sim": 0.7215676307678223,
+          "score": 1.0515676307678223
+        },
+        {
+          "chunk_id": "KB_062",
+          "tags": [
+            "report_use",
+            "template",
+            "positive",
+            "moderate",
+            "findings"
+          ],
+          "text": "Findings wording for moderate-confidence positive output: findings are suggestive of pneumothorax on this automated screening output, but interpretation should remain cautious.",
+          "sim": 0.7403279542922974,
+          "score": 1.0103279542922974
+        },
+        {
+          "chunk_id": "KB_064",
+          "tags": [
+            "report_use",
+            "template",
+            "negative",
+            "high",
+            "findings"
+          ],
+          "text": "Findings wording for high-confidence negative output: the automated screening output is not suggestive of pneumothorax. This does not fully exclude disease in every case.",
+          "sim": 0.7200883030891418,
+          "score": 0.9900883030891419
+        },
+        {
+          "chunk_id": "KB_063",
+          "tags": [
+            "report_use",
+            "template",
+            "positive",
+            "borderline",
+            "uncertainty",
+            "findings"
+          ],
+          "text": "Borderline positive wording: the automated output raises possible concern for pneumothorax, but confidence is borderline and the result should be treated as indeterminate rather than definitive.",
+          "sim": 0.7094146013259888,
+          "score": 0.9794146013259888
+        },
+        {
+          "chunk_id": "KB_072",
+          "tags": [
+            "report_use",
+            "impression",
+            "negative",
+            "high"
+          ],
+          "text": "Impression wording for high-confidence negative output: impression is not suggestive of pneumothorax on this automated screening output, with continued need for human review.",
+          "sim": 0.6987351179122925,
+          "score": 0.9687351179122925
+        }
+      ]
+    },
+    "visual_support": {
+      "overlay_available": true,
+      "overlay_path": "C:\\Users\\Steven\\Desktop\\Final_project_202218020208_lighweight_pneumothorax_detection\\RAG+LLM\\reports\\overlays\\00000013_011_20260309_181405_overlay.png",
+      "overlay_filename": "00000013_011_20260309_181405_overlay.png",
+      "overlay_note": "An accompanying visual overlay highlights the model-identified region of interest for review."
+    }
+  },
+  "report": {
+    "diagnostic_report": "Clinical context: Automated screening for pneumothorax.\nTechnique: Single-view chest radiograph.\nFindings: The automated screening output is suggestive of pneumothorax.\nImpression: Findings are suggestive of pneumothorax on automated screening, pending qualified human review.\nRecommendations: Urgent clinical correlation and formal radiological review are required.\nLimitations: This is an automated screening output only. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output. The output does not replace comprehensive clinical and radiological assessment.",
+    "evidence": {
+      "text_chunk_ids": [
+        "KB_061",
+        "KB_070"
+      ],
+      "retrieved_case_ids": [
+        "1.2.276.0.7230010.3.1.4.8323329.388.1517875162.713279",
+        "1.2.276.0.7230010.3.1.4.8323329.5657.1517875189.357044",
+        "1.2.276.0.7230010.3.1.4.8323329.10287.1517875222.997107",
+        "1.2.276.0.7230010.3.1.4.8323329.10044.1517875221.721779",
+        "1.2.276.0.7230010.3.1.4.8323329.583.1517875163.545784"
+      ]
+    },
+    "visual_support": {
+      "overlay_available": true,
+      "overlay_path": "C:\\Users\\Steven\\Desktop\\Final_project_202218020208_lighweight_pneumothorax_detection\\RAG+LLM\\reports\\overlays\\00000013_011_20260309_181405_overlay.png",
+      "overlay_filename": "00000013_011_20260309_181405_overlay.png",
+      "overlay_note": "An accompanying visual overlay highlights the model-identified region of interest for review."
+    }
+  }
+}
