@@ -1,0 +1,137 @@
+{
+  "image_path": "C:\\Users\\Steven\\Desktop\\Final Project\\Datasets\\Dataset_2\\pneumothorax_normal_balanced_images\\00000013_039.png",
+  "payload": {
+    "task": "pneumothorax_binary_classification",
+    "prediction": {
+      "p_calibrated": 0.9601128697395325,
+      "y_pred": 1,
+      "threshold": 0.37,
+      "temperature_T": 0.8587129712104797,
+      "confidence_band": "high",
+      "narrative_label": "positive"
+    },
+    "report_constraints": {
+      "allow_localization": false,
+      "allow_laterality": false,
+      "allow_size": false,
+      "allow_extent": false,
+      "allow_tension": false,
+      "allow_specific_imaging_signs": false
+    },
+    "image_rag": {
+      "topk": 5,
+      "summary": {
+        "num_cases": 5,
+        "mean_similarity": 0.03666238561272621,
+        "retrieved_pred_positive_rate": 1.0
+      },
+      "behaviour_context": {
+        "num_cases": 5,
+        "mean_similarity": 0.03666238561272621,
+        "agreement_rate": 1.0,
+        "retrieval_state": "agreement",
+        "low_similarity": true
+      },
+      "retrieved_case_ids": [
+        "1.2.276.0.7230010.3.1.4.8323329.388.1517875162.713279",
+        "1.2.276.0.7230010.3.1.4.8323329.583.1517875163.545784",
+        "1.2.276.0.7230010.3.1.4.8323329.10287.1517875222.997107",
+        "1.2.276.0.7230010.3.1.4.8323329.5657.1517875189.357044",
+        "1.2.276.0.7230010.3.1.4.8323329.31941.1517875157.590337"
+      ]
+    },
+    "text_rag": {
+      "query": "pneumothorax automated report wording; positive output; high confidence; retrieval agreement; low similarity context; findings impression recommendations limitations; classification-only; no laterality no localization no size no extent no tension; safe concise professional wording",
+      "scenario": {
+        "polarity": "positive",
+        "confidence": "high",
+        "narrative_label": "positive",
+        "retrieval_state": "agreement",
+        "low_similarity": true
+      },
+      "topk": 5,
+      "evidence_chunks": [
+        {
+          "chunk_id": "KB_005",
+          "tags": [
+            "template",
+            "positive"
+          ],
+          "text": "Template (positive): The classifier output is suggestive of pneumothorax (binary classification). This result provides no localisation or severity assessment. Human review and clinical correlation are required.",
+          "sim": 0.7057670950889587,
+          "score": 0.7657670950889588
+        },
+        {
+          "chunk_id": "KB_009",
+          "tags": [
+            "confidence",
+            "high"
+          ],
+          "text": "High confidence wording: 'The model output is strongly suggestive of / strongly not suggestive of pneumothorax based on a calibrated probability far from the threshold.' Avoid adding any imaging descriptors.",
+          "sim": 0.7230536341667175,
+          "score": 0.7830536341667176
+        },
+        {
+          "chunk_id": "KB_049",
+          "tags": [
+            "template",
+            "positive_brief"
+          ],
+          "text": "Brief positive: 'Suggestive of pneumothorax (classification-only). Confirm by human review; no localisation/severity is provided.'",
+          "sim": 0.7635532021522522,
+          "score": 0.7635532021522522
+        },
+        {
+          "chunk_id": "KB_010",
+          "tags": [
+            "confidence",
+            "medium"
+          ],
+          "text": "Medium confidence wording: 'The model output is suggestive of / not suggestive of pneumothorax with moderate confidence; interpret with caution and confirm with human review.'",
+          "sim": 0.7285354137420654,
+          "score": 0.7285354137420654
+        },
+        {
+          "chunk_id": "KB_030",
+          "tags": [
+            "reporting",
+            "false_positives"
+          ],
+          "text": "Caution about false positives: A positive prediction can occur in non-pneumothorax cases; therefore, avoid escalation language and rely on human review and context.",
+          "sim": 0.7183602452278137,
+          "score": 0.7183602452278137
+        }
+      ]
+    },
+    "visual_support": {
+      "overlay_available": true,
+      "overlay_path": "C:\\Users\\Steven\\Desktop\\Final_project_202218020208_lighweight_pneumothorax_detection\\RAG+LLM\\reports\\overlays\\00000013_039_20260309_174030_overlay.png",
+      "overlay_filename": "00000013_039_20260309_174030_overlay.png",
+      "overlay_note": "An accompanying visual overlay highlights the model-identified region of interest for review."
+    }
+  },
+  "report": {
+    "diagnostic_report": "Clinical context: Screening for pneumothorax.\nTechnique: Automated binary classification.\nFindings: The output is strongly suggestive of pneumothorax.\nImpression: Positive for pneumothorax (classification-only).\nRecommendations: Confirm by human review and clinical correlation. No localization, laterality, size, extent, or assessment of tension physiology is available from this output.\nLimitations: This is a classification-only output. A positive prediction can occur in non-pneumothorax cases. Human review is required.",
+    "evidence": {
+      "text_chunk_ids": [
+        "KB_005",
+        "KB_009",
+        "KB_049",
+        "KB_030"
+      ],
+      "retrieved_case_ids": [
+        "1.2.276.0.7230010.3.1.4.8323329.388.1517875162.713279",
+        "1.2.276.0.7230010.3.1.4.8323329.583.1517875163.545784",
+        "1.2.276.0.7230010.3.1.4.8323329.10287.1517875222.997107",
+        "1.2.276.0.7230010.3.1.4.8323329.5657.1517875189.357044",
+        "1.2.276.0.7230010.3.1.4.8323329.31941.1517875157.590337"
+      ]
+    },
+    "visual_support": {
+      "overlay_available": true,
+      "overlay_path": "C:\\Users\\Steven\\Desktop\\Final_project_202218020208_lighweight_pneumothorax_detection\\RAG+LLM\\reports\\overlays\\00000013_039_20260309_174030_overlay.png",
+      "overlay_filename": "00000013_039_20260309_174030_overlay.png",
+      "overlay_note": "An accompanying visual overlay highlights the model-identified region of interest for review."
+    }
+  }
+}

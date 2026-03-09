@@ -1,0 +1,721 @@
+group,image_path,p,yhat,json_ok,evidence_ok,hallucination,too_long,fail_safe,fail_reason,unsupported_localization,unsupported_size,unsupported_tension,unsupported_imaging_sign,report_word_count,diagnostic_report,evidence_text_ids,evidence_case_ids
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\564_test_0_.png,0.026106104254722595,0,True,True,False,False,False,,False,False,False,False,64,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: No features suggestive of pneumothorax are identified.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised. Further imaging may be considered if clinical suspicion persists.
+Limitations: This analysis is limited to a binary screening assessment. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\564_test_0_.png,0.026106104254722595,0,True,True,False,False,False,,False,False,False,False,47,"Clinical context: Screening for pneumothorax.
+Technique: Chest radiograph.
+Findings: No pneumothorax is identified.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised.
+Limitations: The assessment is based on a single view. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output.",[],"[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.4340.1517875182.354827""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\564_test_0_.png,0.026106104254722595,0,True,True,False,False,False,,False,False,False,False,80,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax. This does not fully exclude disease in every case.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output, with continued need for human review.
+Recommendations: Clinical correlation and review by a qualified radiologist is required.
+Limitations: This is a classification-only output. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output.","[""KB_064"", ""KB_072""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\564_test_0_.png,0.026106104254722595,0,True,True,False,False,False,,False,False,False,False,98,"Clinical context: Automated screening for pneumothorax.
+Technique: Analysis performed using an automated screening algorithm.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: This output requires review by a qualified radiologist. This does not fully exclude disease in every case.
+Limitations: This is an automated screening output. The underlying algorithm was applied to a case with limited contextual support from its reference library, which should prompt appropriate clinical caution. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output.","[""KB_064"", ""KB_072""]","[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.4340.1517875182.354827""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\9337_train_0_.png,0.050102874636650085,0,True,True,False,False,False,,False,False,False,False,61,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: No evidence suggestive of pneumothorax.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised. Further assessment may be considered if clinical suspicion persists.
+Limitations: This analysis is limited to screening for pneumothorax. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\9337_train_0_.png,0.050102874636650085,0,True,True,False,False,False,,False,False,False,False,43,"Clinical context: Screening for pneumothorax.
+Technique: Chest radiograph.
+Findings: No pneumothorax is identified.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised.
+Limitations: The assessment is based on a single view. Localization, laterality, size, and extent are not available from this output.",[],"[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.5038.1517875186.83236""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\9337_train_0_.png,0.050102874636650085,0,True,True,False,False,False,,False,False,False,False,107,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax. This does not fully exclude disease in every case.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output, with continued need for human review.
+Recommendations: This output requires review by a qualified radiologist. Assessment of laterality, localization, size, extent, or tension physiology is not available from this automated output.
+Limitations: This is an automated screening output with inherent limitations. The conclusion should be interpreted with appropriate clinical caution. Final diagnosis requires correlation with the complete clinical context and full human interpretation of the images.","[""KB_064"", ""KB_072"", ""KB_065""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\9337_train_0_.png,0.050102874636650085,0,True,True,False,False,False,,False,False,False,False,108,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax. This does not fully exclude disease in every case.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output, with continued need for human review.
+Recommendations: Clinical correlation and review by a qualified radiologist is required. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output.
+Limitations: This is an automated screening output. The underlying analysis was performed in a context of low similarity to reference cases, which may affect stability. The final diagnosis must be made by a qualified radiologist.","[""KB_064"", ""KB_072""]","[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.5038.1517875186.83236""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8353_train_0_.png,0.04323223978281021,0,True,True,False,False,False,,False,False,False,False,82,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: The findings are not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax is identified.
+Recommendations: Clinical correlation is advised. Further imaging may be considered if clinical suspicion persists.
+Limitations: This is a screening assessment. The analysis does not provide localization, laterality, size, or extent of any potential finding. The assessment for tension physiology is not available from this output. The findings should be interpreted within the full clinical context.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8353_train_0_.png,0.04323223978281021,0,True,True,False,False,False,,False,False,False,False,83,"Clinical context: Screening for pneumothorax.
+Technique: Single-view chest radiograph.
+Findings: No pneumothorax is identified. The lung fields appear clear without evidence of pleural line separation.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised. If clinical suspicion persists, consider additional imaging or follow-up as clinically indicated.
+Limitations: This assessment is based on a single view. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output. The findings should be interpreted in the full clinical context.",[],[]
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8353_train_0_.png,0.04323223978281021,0,True,True,False,False,False,,False,False,False,False,69,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for human review. This does not fully exclude disease in every case.
+Limitations: This is a classification-only output. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output.","[""KB_064"", ""KB_072""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8353_train_0_.png,0.04323223978281021,0,True,True,False,False,False,,False,False,False,False,75,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: This output requires qualified human review and clinical correlation. This does not fully exclude disease in every case.
+Limitations: This is an automated screening output. The contextual support for this finding is limited. The conclusion should be interpreted with appropriate clinical caution.","[""KB_064"", ""KB_072"", ""KB_065""]","[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.4340.1517875182.354827"", ""1.2.276.0.7230010.3.1.4.8323329.11180.1517875231.591001""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\3840_train_0_.png,0.22960901260375977,0,True,True,False,False,False,,False,False,False,False,73,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: No features suggestive of pneumothorax are identified.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised. Further assessment of localization, laterality, size, extent, or tension physiology is not available from this output.
+Limitations: This analysis is based on a single view and may not detect all cases, particularly small or localized pneumothoraces. Clinical context and physical examination remain essential.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\3840_train_0_.png,0.22960901260375977,0,True,True,False,False,False,,False,False,False,False,83,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: The analysis is not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax is identified.
+Recommendations: Clinical correlation is advised. Further assessment may be considered if clinical suspicion persists.
+Limitations: The analysis is based on a single view. The retrieved reference cases show low similarity to the current study, which may affect the stability of the interpretation. Assessment of laterality, size, extent, or tension physiology is not available from this output.",[],"[""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.12897.1517875242.426825"", ""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\3840_train_0_.png,0.22960901260375977,0,True,True,False,False,False,,False,False,False,False,78,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for human review and correlation with the full clinical context is required.
+Limitations: This is an automated screening output and does not fully exclude disease in every case. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output.","[""KB_064"", ""KB_072""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\3840_train_0_.png,0.22960901260375977,0,True,True,False,False,False,,False,False,False,False,100,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax. This does not fully exclude disease in every case.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output, with continued need for human review.
+Recommendations: Clinical correlation and review by a qualified radiologist is required. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output.
+Limitations: This is an automated screening output with inherent limitations. The output should be interpreted with appropriate clinical caution and does not constitute a final diagnostic report.","[""KB_064"", ""KB_072"", ""KB_065""]","[""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.12897.1517875242.426825"", ""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\3341_train_0_.png,0.028711462393403053,0,True,True,False,False,False,,False,False,False,False,71,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: The examination is not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax identified.
+Recommendations: Clinical correlation is advised. Further imaging may be considered if clinical suspicion persists.
+Limitations: This is a screening assessment. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output. The findings should be interpreted in the full clinical context.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\3341_train_0_.png,0.028711462393403053,0,True,True,False,False,False,,False,False,False,False,80,"Clinical context: Screening for pneumothorax.
+Technique: Chest radiograph.
+Findings: No pneumothorax is identified. The examination is not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax.
+Recommendations: Clinical correlation is advised. If clinical suspicion persists, consider further evaluation.
+Limitations: This assessment is based on a single view. The retrieved reference cases were of low similarity and showed conflicting predictions, which limits the contextual support for this finding. Assessment of laterality, size, extent, or tension physiology is not available from this output.",[],"[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.5038.1517875186.83236""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\3341_train_0_.png,0.028711462393403053,0,True,True,False,False,False,,False,False,False,False,69,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for human review. This does not fully exclude disease in every case.
+Limitations: This is a classification-only output. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output.","[""KB_064"", ""KB_072""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\3341_train_0_.png,0.028711462393403053,0,True,True,False,False,False,,False,False,False,False,82,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for human review. This output does not fully exclude disease in every case.
+Limitations: This is an automated screening output. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output. Interpretation should be integrated with the full clinical context and imaging study.","[""KB_064"", ""KB_072""]","[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.5038.1517875186.83236""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8545_train_0_.png,0.023993846029043198,0,True,True,False,False,False,,False,False,False,False,70,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: The findings are not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax is identified.
+Recommendations: Clinical correlation is advised. Further imaging may be considered if clinical suspicion persists.
+Limitations: This is a screening assessment. Localization, laterality, size, and extent of any potential finding are not available from this output. The assessment does not evaluate for tension physiology.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8545_train_0_.png,0.023993846029043198,0,True,True,False,False,False,,False,False,False,False,47,"Clinical context: Screening for pneumothorax.
+Technique: Chest radiograph.
+Findings: No pneumothorax is identified.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised.
+Limitations: The assessment is based on a single view. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output.",[],[]
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8545_train_0_.png,0.023993846029043198,0,True,True,False,False,False,,False,False,False,False,92,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax. This does not fully exclude disease in every case.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output, with continued need for human review.
+Recommendations: Clinical correlation and review by a qualified radiologist is required.
+Limitations: This is an automated screening output only. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output. The output should not be used as a standalone diagnostic tool.","[""KB_064"", ""KB_072""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8545_train_0_.png,0.023993846029043198,0,True,True,False,False,False,,False,False,False,False,82,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: This output requires qualified human review and clinical correlation. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output.
+Limitations: This is an automated screening output and does not fully exclude disease in every case. The conclusion should be interpreted with appropriate clinical caution.","[""KB_064"", ""KB_072"", ""KB_065""]","[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.4340.1517875182.354827"", ""1.2.276.0.7230010.3.1.4.8323329.11180.1517875231.591001""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\59_train_1_.png,0.8911826610565186,1,True,True,False,False,False,,False,False,False,False,68,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: The findings are suggestive of pneumothorax.
+Impression: Findings suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised. Further evaluation with additional imaging may be considered based on clinical presentation.
+Limitations: This is a screening assessment. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output. Clinical and radiographic correlation is required.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\59_train_1_.png,0.8911826610565186,1,True,True,False,False,False,,False,False,False,False,54,"Clinical context: Screening for pneumothorax.
+Technique: Chest radiograph.
+Findings: The findings are suggestive of pneumothorax.
+Impression: Findings suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised. Further evaluation may be considered.
+Limitations: This assessment is based on a single view. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output.",[],"[""1.2.276.0.7230010.3.1.4.8323329.1221.1517875166.844950"", ""1.2.276.0.7230010.3.1.4.8323329.388.1517875162.713279"", ""1.2.276.0.7230010.3.1.4.8323329.12166.1517875237.793760"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.5359.1517875187.749312""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\59_train_1_.png,0.8911826610565186,1,True,True,False,False,False,,False,False,False,False,87,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is suggestive of pneumothorax.
+Impression: Impression is suggestive of pneumothorax on automated screening, pending qualified human review.
+Recommendations: Urgent clinical correlation and formal radiologist review are required. This output does not provide assessment of laterality, localization, size, extent, or tension physiology.
+Limitations: This is an automated screening output only. It is not a definitive diagnostic report and must be interpreted by a qualified radiologist. False positive and false negative results are possible.","[""KB_061"", ""KB_070""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\59_train_1_.png,0.8911826610565186,1,True,True,False,False,False,,False,False,False,False,75,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is suggestive of pneumothorax.
+Impression: Impression is suggestive of pneumothorax on automated screening, pending qualified human review.
+Recommendations: Urgent clinical correlation and formal radiologist review are required. This output does not provide assessment of laterality, size, extent, or tension physiology.
+Limitations: This is an automated screening output. Interpretation should remain cautious. It does not fully exclude disease in every case.","[""KB_061"", ""KB_070"", ""KB_062"", ""KB_064"", ""KB_063"", ""KB_072""]","[""1.2.276.0.7230010.3.1.4.8323329.1221.1517875166.844950"", ""1.2.276.0.7230010.3.1.4.8323329.388.1517875162.713279"", ""1.2.276.0.7230010.3.1.4.8323329.12166.1517875237.793760"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.5359.1517875187.749312""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8821_train_0_.png,0.020927265286445618,0,True,True,False,False,False,,False,False,False,False,68,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: No features suggestive of pneumothorax are identified.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised. Further assessment of localization, laterality, size, extent, or tension physiology is not available from this output.
+Limitations: This analysis is based on a single view and may not detect all abnormalities. Clinical context and physical examination remain essential.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8821_train_0_.png,0.020927265286445618,0,True,True,False,False,False,,False,False,False,False,83,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: The analysis is not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax is identified.
+Recommendations: Clinical correlation is advised. Further evaluation may be considered if clinical suspicion persists.
+Limitations: The analysis is based on a single view. The retrieved reference cases show low similarity to the current study, which may affect the stability of the interpretation. Assessment of laterality, size, extent, or tension physiology is not available from this output.",[],"[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.11180.1517875231.591001""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8821_train_0_.png,0.020927265286445618,0,True,True,False,False,False,,False,False,False,False,81,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: This output requires review by a qualified radiologist. This does not fully exclude disease in every case.
+Limitations: This is a classification-only output. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output. The conclusion should be interpreted with appropriate clinical caution.","[""KB_064"", ""KB_072"", ""KB_065""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8821_train_0_.png,0.020927265286445618,0,True,True,False,False,False,,False,False,False,False,89,"Clinical context: Automated screening for pneumothorax.
+Technique: Analysis performed using an automated screening system.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: This output requires qualified human review and clinical correlation. This does not fully exclude disease in every case.
+Limitations: This is an automated screening output with inherent limitations. The conclusion should be interpreted with appropriate clinical caution. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output.","[""KB_064"", ""KB_072"", ""KB_065""]","[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.11180.1517875231.591001""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8245_train_0_.png,0.013857156038284302,0,True,True,False,False,False,,False,False,False,False,61,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: No evidence suggestive of pneumothorax.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is recommended. Further imaging may be considered if clinical suspicion persists.
+Limitations: This analysis is limited to screening for pneumothorax. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8245_train_0_.png,0.013857156038284302,0,True,True,False,False,False,,False,False,False,False,64,"Clinical context: Screening for pneumothorax.
+Technique: Chest radiograph.
+Findings: No pneumothorax is identified.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised. Further imaging may be considered if clinical suspicion persists.
+Limitations: The assessment is based on a single view. Localization, laterality, size, and extent are not available from this output. The findings should be interpreted with caution due to limited contextual support.",[],"[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.11180.1517875231.591001"", ""1.2.276.0.7230010.3.1.4.8323329.4340.1517875182.354827""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8245_train_0_.png,0.013857156038284302,0,True,True,False,False,False,,False,False,False,False,79,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for human review. This output does not fully exclude disease in every case.
+Limitations: This is a classification-only output. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output. The conclusion should be interpreted with appropriate clinical caution.","[""KB_064"", ""KB_072"", ""KB_065""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8245_train_0_.png,0.013857156038284302,0,True,True,False,False,False,,False,False,False,False,101,"Clinical context: Automated screening for pneumothorax.
+Technique: Analysis performed using an automated screening algorithm.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: This output requires qualified human review and clinical correlation. This does not fully exclude disease in every case.
+Limitations: This is an automated screening output. The underlying image context shows low similarity to the algorithm's reference cases, and the retrieved reference cases are in conflict with the current output. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output.","[""KB_064"", ""KB_072""]","[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.11180.1517875231.591001"", ""1.2.276.0.7230010.3.1.4.8323329.4340.1517875182.354827""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\5241_train_0_.png,0.028245065361261368,0,True,True,False,False,False,,False,False,False,False,65,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: No evidence suggestive of pneumothorax.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised. Further evaluation may be considered if clinical suspicion persists.
+Limitations: This assessment does not provide localization, laterality, size, extent, or tension physiology evaluation. The output should be interpreted in conjunction with clinical findings and other diagnostic information.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\5241_train_0_.png,0.028245065361261368,0,True,True,False,False,False,,False,False,False,False,61,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: No evidence suggestive of pneumothorax.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised. Further evaluation may be considered if clinical suspicion persists.
+Limitations: The analysis is based on limited contextual support. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output.",[],"[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.5038.1517875186.83236""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\5241_train_0_.png,0.028245065361261368,0,True,True,False,False,False,,False,False,False,False,79,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for human review. This output does not fully exclude disease in every case.
+Limitations: This is a classification-only output. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output. Interpretation should be integrated with the full clinical context.","[""KB_064"", ""KB_072""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\5241_train_0_.png,0.028245065361261368,0,True,True,False,False,False,,False,False,False,False,89,"Clinical context: Automated screening for pneumothorax.
+Technique: Analysis performed using an automated screening algorithm.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: This output requires qualified human review and clinical correlation. This does not fully exclude disease in every case.
+Limitations: This is an automated screening output with inherent limitations. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output. The conclusion should be interpreted with appropriate clinical caution.","[""KB_064"", ""KB_072"", ""KB_065""]","[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.5038.1517875186.83236""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\5797_train_0_.png,0.030834952369332314,0,True,True,False,False,False,,False,False,False,False,66,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: The analysis is not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax is identified.
+Recommendations: Clinical correlation is advised. Further imaging may be considered if clinical suspicion persists.
+Limitations: This analysis is a screening tool and does not assess laterality, size, extent, or tension physiology. It should not replace a comprehensive radiologist review.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\5797_train_0_.png,0.030834952369332314,0,True,True,False,False,False,,False,False,False,False,85,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: The analysis is not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax is identified.
+Recommendations: Clinical correlation is advised. Further assessment may be considered if there is high clinical suspicion.
+Limitations: The analysis is based on a single view. The retrieved reference cases show low similarity to the current study, which may affect the stability of the interpretation. Assessment of laterality, size, extent, or tension physiology is not available from this output.",[],"[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.5038.1517875186.83236""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\5797_train_0_.png,0.030834952369332314,0,True,True,False,False,False,,False,False,False,False,78,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for human review. This output does not fully exclude disease in every case.
+Limitations: This is a classification-only output. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output. Interpretation should be integrated with full clinical context.","[""KB_064"", ""KB_072""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\5797_train_0_.png,0.030834952369332314,0,True,True,False,False,False,,False,False,False,False,81,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output, with continued need for human review.
+Recommendations: This output does not fully exclude disease in every case. Clinical correlation and review by a qualified radiologist are required.
+Limitations: This is an automated screening output. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output.","[""KB_064"", ""KB_072""]","[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.5038.1517875186.83236""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\7514_train_0_.png,0.08300580084323883,0,True,True,False,False,False,,False,False,False,False,64,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: No evidence suggestive of pneumothorax.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised. Further imaging may be considered if clinical suspicion persists.
+Limitations: This assessment does not provide localization, laterality, size, extent, or tension physiology evaluation. The output should be interpreted in conjunction with clinical findings and radiologist review.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\7514_train_0_.png,0.08300580084323883,0,True,True,False,False,False,,False,False,False,False,81,"Clinical context: Screening for pneumothorax.
+Technique: Single-view chest radiograph.
+Findings: No pneumothorax is identified. The output is not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax.
+Recommendations: Clinical correlation is advised. Further assessment may be required if clinical suspicion persists.
+Limitations: This assessment is based on a single view. The retrieved contextual support for this finding is limited and of low similarity, which increases uncertainty. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output.",[],"[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.10791.1517875225.649541""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\7514_train_0_.png,0.08300580084323883,0,True,True,False,False,False,,False,False,False,False,79,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for human review. This output does not fully exclude disease in every case.
+Limitations: This is a classification-only output. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output. The conclusion should be interpreted with appropriate clinical caution.","[""KB_064"", ""KB_072"", ""KB_065""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\7514_train_0_.png,0.08300580084323883,0,True,True,False,False,False,,False,False,False,False,108,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax. This does not fully exclude disease in every case.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output, with continued need for human review.
+Recommendations: Clinical correlation and review by a qualified radiologist is required. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output.
+Limitations: This is an automated screening output. The underlying analysis was performed in a context of low similarity to reference cases, which may affect stability. The final interpretation must be made by a qualified radiologist.","[""KB_064"", ""KB_072""]","[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.10791.1517875225.649541""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\6699_train_0_.png,0.014293243177235126,0,True,True,False,False,False,,False,False,False,False,69,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: No features suggestive of pneumothorax are identified.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised. Further assessment of localization, laterality, size, extent, or tension physiology is not available from this output.
+Limitations: This analysis is based on a single view and may not detect all subtle findings. Clinical context and physical examination remain essential.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\6699_train_0_.png,0.014293243177235126,0,True,True,False,False,False,,False,False,False,False,82,"Clinical context: Screening for pneumothorax.
+Technique: Single-view chest radiograph.
+Findings: No pneumothorax is identified. The examination is not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax.
+Recommendations: Clinical correlation is advised. Further assessment may be considered if there is high clinical suspicion.
+Limitations: This is a screening assessment. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output. The findings should be interpreted with caution as the contextual support for this assessment is limited and conflicting.",[],"[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.11180.1517875231.591001"", ""1.2.276.0.7230010.3.1.4.8323329.4340.1517875182.354827""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\6699_train_0_.png,0.014293243177235126,0,True,True,False,False,False,,False,False,False,False,94,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax. This does not fully exclude disease in every case.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output, with continued need for human review.
+Recommendations: This output requires review by a qualified radiologist. Clinical correlation is essential.
+Limitations: This is an automated screening output only. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output. The output should not be used as a standalone diagnostic tool.","[""KB_064"", ""KB_072""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\6699_train_0_.png,0.014293243177235126,0,True,True,False,False,False,,False,False,False,False,95,"Clinical context: Automated screening for pneumothorax.
+Technique: Analysis performed using an automated screening algorithm.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: This output requires qualified human review and clinical correlation. This does not fully exclude disease in every case.
+Limitations: This is an automated screening output with inherent limitations. The output is generated from a classification-only model; assessment of laterality, localization, size, extent, or tension physiology is not available. The conclusion should be interpreted with appropriate clinical caution.","[""KB_064"", ""KB_072"", ""KB_065""]","[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.11180.1517875231.591001"", ""1.2.276.0.7230010.3.1.4.8323329.4340.1517875182.354827""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\280_train_0_.png,0.13922546803951263,0,True,True,False,False,False,,False,False,False,False,62,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: No evidence suggestive of pneumothorax.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised. Further assessment may be considered if clinical suspicion persists.
+Limitations: This analysis is limited to a binary screening assessment. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\280_train_0_.png,0.13922546803951263,0,True,True,False,False,False,,False,False,False,False,82,"Clinical context: Screening for pneumothorax.
+Technique: Chest radiograph.
+Findings: The examination is not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax is identified.
+Recommendations: Clinical correlation is advised. Further assessment may be considered if there is high clinical suspicion.
+Limitations: The assessment is based on a single view. The retrieved reference cases were of low similarity and showed conflicting findings, which limits the contextual support for this interpretation. Assessment of laterality, size, extent, or tension physiology is not available from this output.",[],"[""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.5038.1517875186.83236""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\280_train_0_.png,0.13922546803951263,0,True,True,False,False,False,,False,False,False,False,70,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for human review. This output does not fully exclude disease in every case.
+Limitations: This is a classification-only output. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output.","[""KB_064"", ""KB_072""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\280_train_0_.png,0.13922546803951263,0,True,True,False,False,False,,False,False,False,False,75,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: This output requires qualified human review and clinical correlation. It does not fully exclude disease in every case.
+Limitations: This is a screening output with inherent limitations. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output.","[""KB_064"", ""KB_072""]","[""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.5038.1517875186.83236""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\5809_train_0_.png,0.03568132221698761,0,True,True,False,False,False,,False,False,False,False,76,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: The analysis is not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax is identified.
+Recommendations: Clinical correlation is advised. Further imaging may be considered if clinical suspicion persists.
+Limitations: This is a screening assessment. Localization, laterality, size, and extent of any potential finding are not available from this output. The assessment is based on a single view and may not detect all abnormalities.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\5809_train_0_.png,0.03568132221698761,0,True,True,False,False,False,,False,False,False,False,73,"Clinical context: Screening for pneumothorax.
+Technique: Single-view chest radiograph.
+Findings: The examination is not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax is identified.
+Recommendations: Clinical correlation is advised. If clinical suspicion persists, consider further evaluation.
+Limitations: This is a screening assessment. The retrieved reference cases were of low similarity and showed conflicting findings, which limits contextual support. Assessment of laterality, size, extent, or tension physiology is not available from this output.",[],"[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.5038.1517875186.83236""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\5809_train_0_.png,0.03568132221698761,0,True,True,False,False,False,,False,False,False,False,92,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax. This does not fully exclude disease in every case.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output, with continued need for human review.
+Recommendations: Clinical correlation and review by a qualified radiologist are required.
+Limitations: This is an automated screening output only. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output. The output should not be used as a standalone diagnostic tool.","[""KB_064"", ""KB_072""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\5809_train_0_.png,0.03568132221698761,0,True,True,False,False,False,,False,False,False,False,87,"Clinical context: Automated screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: This output requires qualified human review and clinical correlation. This does not fully exclude disease in every case.
+Limitations: This is a screening output with inherent limitations. The conclusion should be interpreted with appropriate clinical caution. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output.","[""KB_064"", ""KB_072"", ""KB_065""]","[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.5038.1517875186.83236""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\29_test_0_.png,0.13151119649410248,0,True,True,False,False,False,,False,False,False,False,59,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: No evidence suggestive of pneumothorax.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is recommended as with any screening examination.
+Limitations: This assessment is based on a single view and does not provide localization, laterality, size, or extent information. Clinical context and physical examination remain essential.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\29_test_0_.png,0.13151119649410248,0,True,True,False,False,False,,False,False,False,False,78,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: No pneumothorax is identified. The findings are not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax.
+Recommendations: Clinical correlation is advised. If clinical suspicion persists, consider further evaluation.
+Limitations: This is a screening assessment. The analysis is based on a single view. Detailed assessment of size, extent, laterality, or tension physiology is not available from this output. The contextual support for this finding is limited.",[],"[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.5038.1517875186.83236""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\29_test_0_.png,0.13151119649410248,0,True,True,False,False,False,,False,False,False,False,81,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax. This does not fully exclude disease in every case.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output, with continued need for human review.
+Recommendations: Clinical correlation and review by a qualified radiologist is required.
+Limitations: This is an automated screening output only. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output.","[""KB_064"", ""KB_072""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\29_test_0_.png,0.13151119649410248,0,True,True,False,False,False,,False,False,False,False,80,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: This output requires qualified human review. Assessment of laterality, localization, size, extent, or tension physiology is not available from this automated output.
+Limitations: This is an automated screening output and does not fully exclude disease in every case. The conclusion should be interpreted with appropriate clinical caution.","[""KB_064"", ""KB_072"", ""KB_065""]","[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.5038.1517875186.83236""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8294_train_0_.png,0.06469396501779556,0,True,True,False,False,False,,False,False,False,False,58,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: No evidence suggestive of pneumothorax.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is recommended. Further evaluation may be considered if clinical suspicion persists.
+Limitations: This assessment does not provide localization, laterality, size, extent, or tension physiology evaluation. Clinical context and physical examination remain essential.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8294_train_0_.png,0.06469396501779556,0,True,True,False,False,False,,False,False,False,False,76,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: The analysis is not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax is identified.
+Recommendations: Clinical correlation is advised. Further assessment may be considered if there is high clinical suspicion.
+Limitations: The analysis is based on a single view. The contextual support for this finding is limited and conflicting. Assessment of laterality, size, extent, or tension physiology is not available from this output.",[],"[""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.10397.1517875223.521707""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8294_train_0_.png,0.06469396501779556,0,True,True,False,False,False,,False,False,False,False,69,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for human review. This does not fully exclude disease in every case.
+Limitations: This is a classification-only output. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output.","[""KB_064"", ""KB_072""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8294_train_0_.png,0.06469396501779556,0,True,True,False,False,False,,False,False,False,False,100,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax. This does not fully exclude disease in every case.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output, with continued need for human review.
+Recommendations: Clinical correlation and review by a qualified radiologist is required. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output.
+Limitations: This is an automated screening output with inherent limitations. The conclusion is based on a classification-only assessment and should be interpreted with appropriate clinical caution.","[""KB_064"", ""KB_072"", ""KB_065""]","[""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.10397.1517875223.521707""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\91_test_0_.png,0.8538504838943481,1,True,True,False,False,False,,False,False,False,False,62,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: The findings are suggestive of pneumothorax.
+Impression: Findings suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised. Further evaluation with additional imaging may be considered based on clinical presentation.
+Limitations: This is a screening assessment. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\91_test_0_.png,0.8538504838943481,1,True,True,False,False,False,,False,False,False,False,77,"Clinical context: Screening for pneumothorax.
+Technique: Single-view chest radiograph.
+Findings: The findings are suggestive of pneumothorax.
+Impression: Findings are suggestive of pneumothorax. Specific laterality, size, extent, and assessment for tension physiology are not available from this output.
+Recommendations: Clinical correlation is advised. Further evaluation with additional imaging may be considered based on clinical presentation.
+Limitations: This is a screening assessment. The findings should be interpreted with caution as the contextual support for this interpretation is limited.",[],"[""1.2.276.0.7230010.3.1.4.8323329.388.1517875162.713279"", ""1.2.276.0.7230010.3.1.4.8323329.10287.1517875222.997107"", ""1.2.276.0.7230010.3.1.4.8323329.5359.1517875187.749312"", ""1.2.276.0.7230010.3.1.4.8323329.583.1517875163.545784"", ""1.2.276.0.7230010.3.1.4.8323329.1221.1517875166.844950""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\91_test_0_.png,0.8538504838943481,1,True,True,False,False,False,,False,False,False,False,74,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is suggestive of pneumothorax.
+Impression: Impression is suggestive of pneumothorax on automated screening, pending qualified human review.
+Recommendations: Urgent clinical correlation and formal radiologist interpretation are required.
+Limitations: This is an automated screening output only. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output. The result does not constitute a final diagnostic report.","[""KB_061"", ""KB_070""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\91_test_0_.png,0.8538504838943481,1,True,True,False,False,False,,False,False,False,False,99,"Clinical context: Automated screening for pneumothorax.
+Technique: Analysis performed using an automated screening system.
+Findings: The automated screening output is suggestive of pneumothorax.
+Impression: Impression is suggestive of pneumothorax on automated screening, pending qualified human review.
+Recommendations: Urgent clinical correlation and formal radiologist review are required. Assessment of laterality, localization, size, extent, and tension physiology is not available from this automated output.
+Limitations: This is an automated screening output and does not constitute a final diagnostic report. The system is not designed to assess laterality, localization, size, extent, or tension physiology. All findings require confirmation by a qualified radiologist.","[""KB_061"", ""KB_070""]","[""1.2.276.0.7230010.3.1.4.8323329.388.1517875162.713279"", ""1.2.276.0.7230010.3.1.4.8323329.10287.1517875222.997107"", ""1.2.276.0.7230010.3.1.4.8323329.5359.1517875187.749312"", ""1.2.276.0.7230010.3.1.4.8323329.583.1517875163.545784"", ""1.2.276.0.7230010.3.1.4.8323329.1221.1517875166.844950""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\3751_train_0_.png,0.027198482304811478,0,True,True,False,False,False,,False,False,False,False,63,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: No evidence suggestive of pneumothorax is identified.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised. Further imaging may be considered if clinical suspicion persists.
+Limitations: This assessment is based on a single view. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\3751_train_0_.png,0.027198482304811478,0,True,True,False,False,False,,False,False,False,False,70,"Clinical context: Screening for pneumothorax.
+Technique: Chest radiograph.
+Findings: No pneumothorax is suggested. The findings are not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax.
+Recommendations: Clinical correlation is advised. Further assessment may be required if clinical suspicion persists.
+Limitations: The assessment is based on a single view. The output does not provide localization, laterality, size, or extent. The findings should be interpreted with caution due to limited contextual support.",[],"[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.4340.1517875182.354827""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\3751_train_0_.png,0.027198482304811478,0,True,True,False,False,False,,False,False,False,False,69,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for human review. This does not fully exclude disease in every case.
+Limitations: This is a classification-only output. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output.","[""KB_064"", ""KB_072""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\3751_train_0_.png,0.027198482304811478,0,True,True,False,False,False,,False,False,False,False,79,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for qualified human review and correlation with the full clinical context is required.
+Limitations: This is an automated screening output and does not fully exclude disease in every case. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output.","[""KB_064"", ""KB_072""]","[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.4340.1517875182.354827""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\745_test_1_.png,0.8517851233482361,1,True,True,False,False,False,,False,False,False,False,68,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: The findings are suggestive of pneumothorax.
+Impression: Findings suggestive of pneumothorax.
+Recommendations: Clinical correlation is recommended. Further evaluation with additional imaging may be considered based on clinical presentation.
+Limitations: This is a screening assessment. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output. Clinical and radiographic correlation is essential.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\745_test_1_.png,0.8517851233482361,1,True,True,False,False,False,,False,False,False,False,80,"Clinical context: Screening for pneumothorax.
+Technique: Chest radiograph.
+Findings: The findings are suggestive of pneumothorax.
+Impression: Findings are suggestive of pneumothorax. Assessment of laterality, size, extent, or tension physiology is not available from this output.
+Recommendations: Clinical correlation is advised. Further evaluation with additional imaging may be considered based on clinical presentation.
+Limitations: This is a screening assessment. The output does not provide localization or quantification. Definitive diagnosis requires correlation with the full clinical context and may require confirmatory imaging.",[],"[""1.2.276.0.7230010.3.1.4.8323329.12166.1517875237.793760"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.10791.1517875225.649541"", ""1.2.276.0.7230010.3.1.4.8323329.32232.1517875159.152931"", ""1.2.276.0.7230010.3.1.4.8323329.10080.1517875221.874515""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\745_test_1_.png,0.8517851233482361,1,True,True,False,False,False,,False,False,False,False,83,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening findings are suggestive of pneumothorax.
+Impression: Impression is suggestive of pneumothorax on automated screening, pending qualified human review.
+Recommendations: Urgent clinical correlation and formal radiologist review are required. This output does not provide assessment of laterality, localization, size, extent, or tension physiology.
+Limitations: This is an automated screening output. It is not a definitive diagnostic report and must be interpreted by a qualified radiologist within the full clinical context.","[""KB_061"", ""KB_070""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\745_test_1_.png,0.8517851233482361,1,True,True,False,False,False,,False,False,False,False,77,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is suggestive of pneumothorax.
+Impression: Impression is suggestive of pneumothorax on automated screening, pending qualified human review.
+Recommendations: Urgent clinical correlation and formal radiologist review are required. Assessment of laterality, localization, size, extent, and tension physiology is not available from this automated output.
+Limitations: This is an automated screening output and does not constitute a final diagnostic report. Interpretation should remain cautious.","[""KB_061"", ""KB_070""]","[""1.2.276.0.7230010.3.1.4.8323329.12166.1517875237.793760"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.10791.1517875225.649541"", ""1.2.276.0.7230010.3.1.4.8323329.32232.1517875159.152931"", ""1.2.276.0.7230010.3.1.4.8323329.10080.1517875221.874515""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\3830_train_0_.png,0.12408299744129181,0,True,True,False,False,False,,False,False,False,False,43,"Clinical context: Screening for pneumothorax.
+Technique: Chest radiograph.
+Findings: No evidence of pneumothorax is identified.
+Impression: The findings are not suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised.
+Limitations: This assessment is based on a single view. Subtle findings may not be apparent.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\3830_train_0_.png,0.12408299744129181,0,True,True,False,False,False,,False,False,False,False,69,"Clinical context: Screening for pneumothorax.
+Technique: Single-view chest radiograph.
+Findings: No pneumothorax is identified. The findings are not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax.
+Recommendations: Clinical correlation is advised. If clinical suspicion persists, consider further evaluation.
+Limitations: This is a screening assessment. The output does not provide localization, laterality, size, or extent. The assessment is based on a single view and may not detect all abnormalities.",[],"[""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.12897.1517875242.426825"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\3830_train_0_.png,0.12408299744129181,0,True,True,False,False,False,,False,False,False,False,67,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: This output requires qualified human review. This does not fully exclude disease in every case.
+Limitations: This is a classification-only output. Assessment of laterality, localization, size, extent, or tension physiology is not available.","[""KB_064"", ""KB_072""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\3830_train_0_.png,0.12408299744129181,0,True,True,False,False,False,,False,False,False,False,79,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for human review. This output does not fully exclude disease in every case.
+Limitations: This is an automated screening output. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output. The conclusion should be interpreted with appropriate clinical caution.","[""KB_064"", ""KB_072"", ""KB_065""]","[""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.12897.1517875242.426825"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\158_test_0_.png,0.07027007639408112,0,True,True,False,False,False,,False,False,False,False,65,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: No evidence suggestive of pneumothorax.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is recommended. Further imaging may be considered if clinical suspicion persists.
+Limitations: This assessment does not provide localization, laterality, size, extent, or tension physiology evaluation. The output should be interpreted in conjunction with clinical findings and full radiological review.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\158_test_0_.png,0.07027007639408112,0,True,True,False,False,False,,False,False,False,False,77,"Clinical context: Screening for pneumothorax.
+Technique: Single-view chest radiograph.
+Findings: No pneumothorax is identified. The examination is not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax.
+Recommendations: None based on this screening examination.
+Limitations: This is a screening assessment. The retrieved comparative cases were of low similarity and showed conflicting findings, which introduces caution in the interpretation. Definitive assessment of laterality, size, extent, or tension physiology is not available from this output. Clinical correlation is advised.",[],"[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.4672.1517875184.64448""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\158_test_0_.png,0.07027007639408112,0,True,True,False,False,False,,False,False,False,False,92,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax. This does not fully exclude disease in every case.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output, with continued need for human review.
+Recommendations: Clinical correlation and review by a qualified radiologist is required.
+Limitations: This is an automated screening output only. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output. The output should not be used as a standalone diagnostic tool.","[""KB_064"", ""KB_072""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\158_test_0_.png,0.07027007639408112,0,True,True,False,False,False,,False,False,False,False,82,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for human review. This output does not fully exclude disease in every case.
+Limitations: This is an automated screening output. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output. Interpretation should be integrated with the full clinical context and imaging study.","[""KB_064"", ""KB_072""]","[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.4672.1517875184.64448""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\1396_train_0_.png,0.36430084705352783,0,True,True,False,False,False,,False,False,False,False,70,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: The findings are indeterminate for pneumothorax.
+Impression: Indeterminate findings. The output is not suggestive of pneumothorax, but confidence is borderline.
+Recommendations: Clinical correlation is advised. Further evaluation may be considered if clinically indicated.
+Limitations: This is a screening output with borderline confidence. Localization, laterality, size, extent, and assessment for tension physiology are not available from this analysis.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\1396_train_0_.png,0.36430084705352783,0,True,True,False,False,False,,False,False,False,False,68,"Clinical context: Screening for pneumothorax.
+Technique: Chest radiograph.
+Findings: The findings are indeterminate for pneumothorax.
+Impression: The study is indeterminate for the presence of pneumothorax.
+Recommendations: Clinical correlation is advised. Further evaluation with additional imaging may be considered if clinically indicated.
+Limitations: The assessment is limited by borderline confidence and conflicting contextual support. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output.",[],"[""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.12657.1517875241.7973"", ""1.2.276.0.7230010.3.1.4.8323329.12897.1517875242.426825"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\1396_train_0_.png,0.36430084705352783,0,True,True,False,False,False,,False,False,False,False,82,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is indeterminate for pneumothorax. The result is not definitively suggestive of pneumothorax, but confidence is borderline.
+Impression: Indeterminate for pneumothorax on this automated screening output.
+Recommendations: This output requires definitive human review and correlation with the complete clinical presentation.
+Limitations: This is a classification-only output. Assessment of laterality, localization, size, extent, or tension physiology is not available. The conclusion should be interpreted with appropriate clinical caution.","[""KB_063"", ""KB_065"", ""KB_064""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\1396_train_0_.png,0.36430084705352783,0,True,True,False,False,False,,False,False,False,False,76,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is indeterminate for pneumothorax. The result should be interpreted with appropriate clinical caution.
+Impression: Indeterminate for pneumothorax on this automated screening output.
+Recommendations: This output requires definitive human review and correlation with the complete clinical presentation.
+Limitations: This is an automated screening output with borderline confidence. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output.","[""KB_063"", ""KB_065""]","[""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.12657.1517875241.7973"", ""1.2.276.0.7230010.3.1.4.8323329.12897.1517875242.426825"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\5496_train_0_.png,0.07761033624410629,0,True,True,False,False,False,,False,False,False,False,76,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: The findings are not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax is identified.
+Recommendations: Clinical correlation is advised. Further imaging may be considered if clinical suspicion persists.
+Limitations: This is a screening assessment. Localization, laterality, size, and extent of any potential finding are not available from this output. The assessment is based on a single view and may not detect all abnormalities.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\5496_train_0_.png,0.07761033624410629,0,True,True,False,False,False,,False,False,False,False,79,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: The analysis is not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax is identified.
+Recommendations: Clinical correlation is advised. Further imaging may be considered if clinical suspicion persists.
+Limitations: The analysis is based on a single view. The retrieved reference cases show low similarity to the current study, which may affect confidence. Assessment of laterality, size, extent, or tension physiology is not available from this output.",[],"[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.5038.1517875186.83236""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\5496_train_0_.png,0.07761033624410629,0,True,True,False,False,False,,False,False,False,False,68,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for human review. This does not fully exclude disease in every case.
+Limitations: This is an automated screening output only. Localization, laterality, size, extent, and tension assessment are not available from this output.","[""KB_064"", ""KB_072""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\5496_train_0_.png,0.07761033624410629,0,True,True,False,False,False,,False,False,False,False,80,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for human review. This output does not fully exclude disease in every case.
+Limitations: This is a classification-only screening output. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output. The conclusion should be interpreted with appropriate clinical caution.","[""KB_064"", ""KB_072"", ""KB_065""]","[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.5038.1517875186.83236""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8706_train_0_.png,0.01734090968966484,0,True,True,False,False,False,,False,False,False,False,64,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: No features suggestive of pneumothorax are identified.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised. Further imaging may be considered if clinical suspicion persists.
+Limitations: This analysis is limited to a binary screening assessment. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8706_train_0_.png,0.01734090968966484,0,True,True,False,False,False,,False,False,False,False,43,"Clinical context: Screening for pneumothorax.
+Technique: Chest radiograph.
+Findings: No pneumothorax is identified.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised.
+Limitations: The assessment is based on a single view. Localization, laterality, size, and extent are not available from this output.",[],"[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.4340.1517875182.354827"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.11180.1517875231.591001""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8706_train_0_.png,0.01734090968966484,0,True,True,False,False,False,,False,False,False,False,79,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for human review. This output does not fully exclude disease in every case.
+Limitations: This is a classification-only output. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output. The conclusion should be interpreted with appropriate clinical caution.","[""KB_064"", ""KB_072"", ""KB_065""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8706_train_0_.png,0.01734090968966484,0,True,True,False,False,False,,False,False,False,False,79,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for human review. This output does not fully exclude disease in every case.
+Limitations: This is an automated screening output. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output. The conclusion should be interpreted with appropriate clinical caution.","[""KB_064"", ""KB_072"", ""KB_065""]","[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.4340.1517875182.354827"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.11180.1517875231.591001""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\9389_train_0_.png,0.02175171487033367,0,True,True,False,False,False,,False,False,False,False,70,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: The findings are not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax is identified.
+Recommendations: Clinical correlation is advised. Further imaging may be considered if clinical suspicion persists.
+Limitations: This is a screening assessment. Localization, laterality, size, and extent of any potential finding are not available from this output. The assessment does not evaluate for tension physiology.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\9389_train_0_.png,0.02175171487033367,0,True,True,False,False,False,,False,False,False,False,82,"Clinical context: Screening for pneumothorax.
+Technique: Frontal chest radiograph.
+Findings: No pneumothorax is identified. The examination is not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax.
+Recommendations: Clinical correlation is advised. Further assessment may be considered if there is a high clinical suspicion.
+Limitations: The assessment is based on a single frontal projection. Localization, laterality, size, and extent of any potential finding are not available from this output. The absence of findings on this single view does not definitively exclude all pathology.",[],"[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.4340.1517875182.354827"", ""1.2.276.0.7230010.3.1.4.8323329.11180.1517875231.591001""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\9389_train_0_.png,0.02175171487033367,0,True,True,False,False,False,,False,False,False,False,70,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for human review. This output does not fully exclude disease in every case.
+Limitations: This is a classification-only output. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output.","[""KB_064"", ""KB_072""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\9389_train_0_.png,0.02175171487033367,0,True,True,False,False,False,,False,False,False,False,84,"Clinical context: Automated screening for pneumothorax.
+Technique: Analysis performed using an automated screening algorithm.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: This output requires qualified human review and clinical correlation. It does not fully exclude disease in every case.
+Limitations: This is an automated screening output with inherent limitations. The underlying contextual support for this conclusion is limited. The final diagnosis must be made by a qualified radiologist.","[""KB_064"", ""KB_072""]","[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.4340.1517875182.354827"", ""1.2.276.0.7230010.3.1.4.8323329.11180.1517875231.591001""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\7876_train_0_.png,0.02588120475411415,0,True,True,False,False,False,,False,False,False,False,71,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: The analysis is not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax is identified.
+Recommendations: Clinical correlation is advised. Further imaging may be considered if clinical suspicion persists.
+Limitations: This is a screening assessment. The analysis does not provide localization, laterality, size, extent, or assessment of tension physiology. The output should be interpreted in the full clinical context.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\7876_train_0_.png,0.02588120475411415,0,True,True,False,False,False,,False,False,False,False,79,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: The analysis is not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax is identified.
+Recommendations: Clinical correlation is advised. Further evaluation may be considered if clinical suspicion persists.
+Limitations: The analysis is based on a single view. The retrieved reference cases show low similarity to the current study, which may affect confidence. Assessment of laterality, size, extent, or tension physiology is not available from this output.",[],"[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.4672.1517875184.64448""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\7876_train_0_.png,0.02588120475411415,0,True,True,False,False,False,,False,False,False,False,77,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for human review and correlation with the full clinical context is required.
+Limitations: This is a screening output and does not fully exclude disease in every case. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output.","[""KB_064"", ""KB_072""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\7876_train_0_.png,0.02588120475411415,0,True,True,False,False,False,,False,False,False,False,83,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: This output requires qualified human review. Clinical correlation is essential.
+Limitations: This is an automated screening output and does not fully exclude disease in every case. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output. The conclusion should be interpreted with appropriate clinical caution.","[""KB_064"", ""KB_072"", ""KB_065""]","[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.4672.1517875184.64448""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\4925_train_0_.png,0.04448783025145531,0,True,True,False,False,False,,False,False,False,False,67,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: No evidence suggestive of pneumothorax.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised. Further imaging may be considered if clinical suspicion persists.
+Limitations: This assessment does not provide localization, laterality, size, extent, or tension physiology evaluation. The output should be interpreted in conjunction with the full clinical context and complete radiographic evaluation.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\4925_train_0_.png,0.04448783025145531,0,True,True,False,False,False,,False,False,False,False,64,"Clinical context: Screening for pneumothorax.
+Technique: Chest radiograph.
+Findings: No pneumothorax is identified.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised. Further imaging may be considered if clinical suspicion persists.
+Limitations: The assessment is based on a single view. Localization, laterality, size, and extent of any potential finding are not available from this output. The overall confidence in this assessment is high.",[],"[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.5038.1517875186.83236""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\4925_train_0_.png,0.04448783025145531,0,True,True,False,False,False,,False,False,False,False,79,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for human review. This output does not fully exclude disease in every case.
+Limitations: This is a classification-only output. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output. Interpretation should be integrated with the full clinical context.","[""KB_064"", ""KB_072""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\4925_train_0_.png,0.04448783025145531,0,True,True,False,False,False,,False,False,False,False,80,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: This output requires qualified human review. Assessment of laterality, localization, size, extent, or tension physiology is not available from this automated output.
+Limitations: This is an automated screening output and does not fully exclude disease in every case. The conclusion should be interpreted with appropriate clinical caution.","[""KB_064"", ""KB_072"", ""KB_065""]","[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.5038.1517875186.83236""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\7634_train_0_.png,0.0456240177154541,0,True,True,False,False,False,,False,False,False,False,60,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: No evidence suggestive of pneumothorax.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised. Further assessment may be considered if clinical suspicion persists.
+Limitations: This analysis is limited to screening for pneumothorax. Assessment of laterality, size, extent, or tension physiology is not available from this output.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\7634_train_0_.png,0.0456240177154541,0,True,True,False,False,False,,False,False,False,False,79,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: The analysis is not suggestive of pneumothorax.
+Impression: No evidence of pneumothorax is identified.
+Recommendations: Clinical correlation is advised. Further evaluation may be considered if clinical suspicion persists.
+Limitations: The analysis is based on a single view. The retrieved reference cases show low similarity to the current study, which may affect confidence. Assessment of laterality, size, extent, or tension physiology is not available from this output.",[],"[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.5038.1517875186.83236""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\7634_train_0_.png,0.0456240177154541,0,True,True,False,False,False,,False,False,False,False,70,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for human review. This output does not fully exclude disease in every case.
+Limitations: This is a classification-only output. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output.","[""KB_064"", ""KB_072""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\7634_train_0_.png,0.0456240177154541,0,True,True,False,False,False,,False,False,False,False,78,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for human review. This output does not fully exclude disease in every case.
+Limitations: This is an automated screening output. Interpretation should be made with appropriate clinical caution. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output.","[""KB_064"", ""KB_072"", ""KB_065""]","[""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641"", ""1.2.276.0.7230010.3.1.4.8323329.5038.1517875186.83236""]"
+G0_llm_only,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8710_train_0_.png,0.013580693863332272,0,True,True,False,False,False,,False,False,False,False,59,"Clinical context: Screening for pneumothorax.
+Technique: AI-assisted analysis of chest radiograph.
+Findings: No evidence suggestive of pneumothorax.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is recommended. Further evaluation may be considered if clinical suspicion persists.
+Limitations: This assessment is based on a single view. Localization, laterality, size, extent, and tension assessment are not available from this output.",[],[]
+G1_image_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8710_train_0_.png,0.013580693863332272,0,True,True,False,False,False,,False,False,False,False,75,"Clinical context: Screening for pneumothorax.
+Technique: Chest radiograph.
+Findings: No pneumothorax is identified.
+Impression: Not suggestive of pneumothorax.
+Recommendations: Clinical correlation is advised. Further imaging may be considered if clinical suspicion persists.
+Limitations: This assessment is based on a single view. The retrieved reference cases show low similarity to the current study, which may affect the stability of the interpretation. Localization, laterality, size, and extent of any potential finding are not available from this output.",[],"[""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.11180.1517875231.591001"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641""]"
+G2_text_rag,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8710_train_0_.png,0.013580693863332272,0,True,True,False,False,False,,False,False,False,False,69,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for human review. This does not fully exclude disease in every case.
+Limitations: This is a classification-only output. Localization, laterality, size, extent, and assessment for tension physiology are not available from this output.","[""KB_064"", ""KB_072""]",[]
+G3_both,C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images\8710_train_0_.png,0.013580693863332272,0,True,True,False,False,False,,False,False,False,False,79,"Clinical context: Automated screening for pneumothorax.
+Technique: Automated analysis performed.
+Findings: The automated screening output is not suggestive of pneumothorax.
+Impression: Impression is not suggestive of pneumothorax on this automated screening output.
+Recommendations: Continued need for qualified human review and correlation with the full clinical context is required.
+Limitations: This is an automated screening output and does not fully exclude disease in every case. Assessment of laterality, localization, size, extent, or tension physiology is not available from this output.","[""KB_064"", ""KB_072""]","[""1.2.276.0.7230010.3.1.4.8323329.4939.1517875185.563513"", ""1.2.276.0.7230010.3.1.4.8323329.14006.1517875249.93352"", ""1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134"", ""1.2.276.0.7230010.3.1.4.8323329.11180.1517875231.591001"", ""1.2.276.0.7230010.3.1.4.8323329.1926.1517875170.276641""]"
