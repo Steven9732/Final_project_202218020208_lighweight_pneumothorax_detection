@@ -1,0 +1,197 @@
+{
+  "image_path": "C:\\Users\\Steven\\Desktop\\Final_project_202218020208_lighweight_pneumothorax_detection\\GUI\\streamlit_outputs\\tmplae0mv_6.png",
+  "payload": {
+    "task": "pneumothorax_binary_classification",
+    "prediction": {
+      "p_calibrated": 0.2451302707195282,
+      "y_pred": 0,
+      "threshold": 0.37,
+      "temperature_T": 0.8587129712104797,
+      "confidence_band": "high",
+      "narrative_label": "negative"
+    },
+    "report_constraints": {
+      "allow_localization": false,
+      "allow_laterality": false,
+      "allow_size": false,
+      "allow_extent": false,
+      "allow_tension": false,
+      "allow_specific_imaging_signs": false
+    },
+    "image_rag": {
+      "topk": 5,
+      "summary": {
+        "num_cases": 5,
+        "mean_similarity": 0.06884553432464599,
+        "retrieved_pred_positive_rate": 1.0
+      },
+      "behaviour_context": {
+        "num_cases": 5,
+        "mean_similarity": 0.06884553432464599,
+        "agreement_rate": 0.0,
+        "retrieval_state": "conflict",
+        "low_similarity": true
+      },
+      "retrieved_case_ids": [
+        "1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134",
+        "1.2.276.0.7230010.3.1.4.8323329.2951.1517875175.446916",
+        "1.2.276.0.7230010.3.1.4.8323329.10071.1517875221.840835",
+        "1.2.276.0.7230010.3.1.4.8323329.2719.1517875174.245677",
+        "1.2.276.0.7230010.3.1.4.8323329.14598.1517875252.944864"
+      ],
+      "similar_cases": [
+        {
+          "case_id": "1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134",
+          "sim": 0.07025299221277237,
+          "p_calibrated": 0.5964450240135193,
+          "y_pred": 1,
+          "y_true": 0
+        },
+        {
+          "case_id": "1.2.276.0.7230010.3.1.4.8323329.2951.1517875175.446916",
+          "sim": 0.06919804215431213,
+          "p_calibrated": 0.6234382390975952,
+          "y_pred": 1,
+          "y_true": 0
+        },
+        {
+          "case_id": "1.2.276.0.7230010.3.1.4.8323329.10071.1517875221.840835",
+          "sim": 0.06838082522153854,
+          "p_calibrated": 0.632626473903656,
+          "y_pred": 1,
+          "y_true": 0
+        },
+        {
+          "case_id": "1.2.276.0.7230010.3.1.4.8323329.2719.1517875174.245677",
+          "sim": 0.06835988909006119,
+          "p_calibrated": 0.6013181209564209,
+          "y_pred": 1,
+          "y_true": 1
+        },
+        {
+          "case_id": "1.2.276.0.7230010.3.1.4.8323329.14598.1517875252.944864",
+          "sim": 0.06803592294454575,
+          "p_calibrated": 0.6201494932174683,
+          "y_pred": 1,
+          "y_true": 0
+        }
+      ]
+    },
+    "text_rag": {
+      "query": "pneumothorax automated report wording; negative output; high confidence; retrieval conflict; low similarity context; findings impression recommendations limitations; classification-only; no laterality no localization no size no extent no tension; safe concise professional wording",
+      "scenario": {
+        "polarity": "negative",
+        "confidence": "high",
+        "narrative_label": "negative",
+        "retrieval_state": "conflict",
+        "low_similarity": true
+      },
+      "topk": 6,
+      "evidence_chunks": [
+        {
+          "chunk_id": "KB_064",
+          "tags": [
+            "report_use",
+            "template",
+            "negative",
+            "high",
+            "findings"
+          ],
+          "text": "Findings wording for high-confidence negative output: the automated screening output is not suggestive of pneumothorax. This does not fully exclude disease in every case.",
+          "sim": 0.7393044233322144,
+          "score": 1.0693044233322144
+        },
+        {
+          "chunk_id": "KB_072",
+          "tags": [
+            "report_use",
+            "impression",
+            "negative",
+            "high"
+          ],
+          "text": "Impression wording for high-confidence negative output: impression is not suggestive of pneumothorax on this automated screening output, with continued need for human review.",
+          "sim": 0.7047183513641357,
+          "score": 1.0347183513641358
+        },
+        {
+          "chunk_id": "KB_061",
+          "tags": [
+            "report_use",
+            "template",
+            "positive",
+            "high",
+            "findings"
+          ],
+          "text": "Findings wording for high-confidence positive output: automated screening findings are suggestive of pneumothorax. Do not add laterality, localisation, size, or tension descriptors.",
+          "sim": 0.7769346833229065,
+          "score": 1.0469346833229065
+        },
+        {
+          "chunk_id": "KB_065",
+          "tags": [
+            "report_use",
+            "template",
+            "negative",
+            "moderate",
+            "findings"
+          ],
+          "text": "Findings wording for moderate-confidence negative output: the output is not suggestive of pneumothorax, but the conclusion should be interpreted with appropriate clinical caution.",
+          "sim": 0.7380414605140686,
+          "score": 1.0080414605140686
+        },
+        {
+          "chunk_id": "KB_070",
+          "tags": [
+            "report_use",
+            "impression",
+            "positive",
+            "high"
+          ],
+          "text": "Impression wording for high-confidence positive output: impression is suggestive of pneumothorax on automated screening, pending qualified human review.",
+          "sim": 0.7115136384963989,
+          "score": 0.9815136384963989
+        },
+        {
+          "chunk_id": "KB_062",
+          "tags": [
+            "report_use",
+            "template",
+            "positive",
+            "moderate",
+            "findings"
+          ],
+          "text": "Findings wording for moderate-confidence positive output: findings are suggestive of pneumothorax on this automated screening output, but interpretation should remain cautious.",
+          "sim": 0.7353872656822205,
+          "score": 0.9453872656822204
+        }
+      ]
+    },
+    "visual_support": {
+      "overlay_available": true,
+      "overlay_path": "C:\\Users\\Steven\\Desktop\\Final_project_202218020208_lighweight_pneumothorax_detection\\GUI\\streamlit_outputs\\overlays\\tmplae0mv_6_20260315_210102_overlay.png",
+      "overlay_filename": "tmplae0mv_6_20260315_210102_overlay.png",
+      "overlay_note": "An accompanying visual overlay highlights the model-identified region of interest for review."
+    }
+  },
+  "report": {
+    "diagnostic_report": "Clinical context: AI-assisted chest X-ray pneumothorax screening. Technique: Image-based automated classification output with retrieval-supported wording constraints. Findings: Automated screening output is not suggestive of pneumothorax. Impression: Not suggestive of pneumothorax on this automated screening result, with continued need for human review. Recommendations: Recommend radiologist review and correlation with the full clinical context. Limitations: This output is classification-only and does not provide laterality, localization, size, extent, pleural line assessment, collapse assessment, or tension assessment.",
+    "evidence": {
+      "text_chunk_ids": [
+        "KB_064",
+        "KB_072",
+        "KB_061"
+      ],
+      "retrieved_case_ids": [
+        "1.2.276.0.7230010.3.1.4.8323329.1038.1517875166.7134",
+        "1.2.276.0.7230010.3.1.4.8323329.2951.1517875175.446916",
+        "1.2.276.0.7230010.3.1.4.8323329.10071.1517875221.840835"
+      ]
+    },
+    "visual_support": {
+      "overlay_available": true,
+      "overlay_path": "C:\\Users\\Steven\\Desktop\\Final_project_202218020208_lighweight_pneumothorax_detection\\GUI\\streamlit_outputs\\overlays\\tmplae0mv_6_20260315_210102_overlay.png",
+      "overlay_filename": "tmplae0mv_6_20260315_210102_overlay.png",
+      "overlay_note": "An accompanying visual overlay highlights the model-identified region of interest for review."
+    }
+  }
+}

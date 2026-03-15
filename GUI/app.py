@@ -130,7 +130,7 @@ def main():
     st.markdown(
         """
         <div class="glass">
-            <div class="title-xl">PneuInsight Studio</div>
+            <div class="title-xl">PneumoAssist</div>
             <div class="subtitle">
                 Lightweight pneumothorax detection with retrieval-augmented evidence and structured LLM reporting.
             </div>
@@ -146,7 +146,7 @@ def main():
         topk_img = st.slider("Top-k image retrieval", min_value=3, max_value=10, value=5, step=1)
         topk_text = st.slider("Top-k text evidence", min_value=3, max_value=6, value=6, step=1)
         save_report = st.toggle("Save report JSON", value=True)
-        st.caption("Set `DEEPSEEK_API_KEY` to enable live LLM generation. Without it, the app uses a safe fallback template report.")
+        
 
     if not Path(assets_dir).exists():
         st.error(f"Assets directory not found: {assets_dir}")
@@ -158,7 +158,7 @@ def main():
     left, right = st.columns([1.1, 1.4], gap="large")
 
     with left:
-        st.markdown('<div class="glass">', unsafe_allow_html=True)
+        
         st.subheader("Input")
         uploaded = st.file_uploader(
             "Upload chest X-ray",
@@ -170,7 +170,7 @@ def main():
 
         if uploaded is not None:
             img = Image.open(uploaded).convert("RGB")
-            st.markdown('<div class="glass">', unsafe_allow_html=True)
+            # st.markdown('<div class="glass">', unsafe_allow_html=True)
             st.subheader("Original Image")
             st.image(img, use_container_width=True)
             st.markdown("</div>", unsafe_allow_html=True)
@@ -199,7 +199,7 @@ def main():
         narrative = pred["narrative_label"]
 
         with right:
-            st.markdown('<div class="glass">', unsafe_allow_html=True)
+            
             st.subheader("Result Summary")
             c1, c2, c3 = st.columns(3)
             with c1:
@@ -212,7 +212,7 @@ def main():
 
             overlay_path = report.get("visual_support", {}).get("overlay_path")
             if overlay_path and Path(overlay_path).exists():
-                st.markdown('<div class="glass">', unsafe_allow_html=True)
+                # st.markdown('<div class="glass">', unsafe_allow_html=True)
                 st.subheader("Model Visual Support")
                 st.image(overlay_path, use_container_width=True)
                 note = report.get("visual_support", {}).get("overlay_note", "")
@@ -223,7 +223,7 @@ def main():
         tab1, tab2, tab3, tab4 = st.tabs(["Structured Report", "Image Retrieval", "Text Evidence", "Export"])
 
         with tab1:
-            st.markdown('<div class="glass">', unsafe_allow_html=True)
+            # st.markdown('<div class="glass">', unsafe_allow_html=True)
             st.subheader("Diagnostic Report")
 
             report_text = report["diagnostic_report"]
@@ -263,7 +263,7 @@ def main():
             st.markdown("</div>", unsafe_allow_html=True)
 
         with tab2:
-            st.markdown('<div class="glass">', unsafe_allow_html=True)
+            # st.markdown('<div class="glass">', unsafe_allow_html=True)
             st.subheader("Retrieved Similar Cases")
             sim_cases = payload.get("image_rag", {}).get("similar_cases", [])
             if sim_cases:
@@ -280,7 +280,7 @@ def main():
             st.markdown("</div>", unsafe_allow_html=True)
 
         with tab3:
-            st.markdown('<div class="glass">', unsafe_allow_html=True)
+            # st.markdown('<div class="glass">', unsafe_allow_html=True)
             st.subheader("Text Evidence Chunks")
             text_chunks = payload.get("text_rag", {}).get("evidence_chunks", [])
             if text_chunks:
@@ -297,7 +297,7 @@ def main():
             st.markdown("</div>", unsafe_allow_html=True)
 
         with tab4:
-            st.markdown('<div class="glass">', unsafe_allow_html=True)
+            # st.markdown('<div class="glass">', unsafe_allow_html=True)
             st.subheader("Export")
             export_obj = {
                 "report": report,
