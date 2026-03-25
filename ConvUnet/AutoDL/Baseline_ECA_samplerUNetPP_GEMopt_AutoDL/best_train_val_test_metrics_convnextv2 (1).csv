@@ -1,0 +1,4 @@
+Split,Accuracy (%),Precision (%),Recall (%),F1-Score (%),Specificity (%),ROC-AUC (%),Precision-recall (%)
+Train (Best),97.468,92.38,96.534,94.411,97.734,99.572,98.408
+Val (Best),92.365,83.784,81.273,82.51,95.522,96.523,89.358
+Test (Best),91.452,83.065,77.154,80.0,95.522,96.237,88.435
