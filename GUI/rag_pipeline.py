@@ -13,7 +13,7 @@ import torch.nn.functional as F
 import torchvision.transforms as tvT
 from PIL import Image, ImageDraw
 
-from model import ConvNeXtV2TinyScratch
+from ECALSMFModel import ConvNeXtV2TinyScratch
 
 try:
     import faiss  # type: ignore
@@ -111,6 +111,8 @@ class PneumoRAGPipeline:
             n_classes=1,
             drop_path_rate=0.1,
             use_seg_guided=False,
+            use_lsmf=True,
+            lsmf_fuse_ch=256,
         )
 
         self.model = ConvNeXtV2TinyScratch(**model_kwargs).to(self.device)
@@ -227,23 +229,29 @@ class PneumoRAGPipeline:
 
     @torch.no_grad()
     def infer_one(self, image_path: str):
+        image_path = str(image_path)
+
+        if not os.path.exists(image_path):
+            raise FileNotFoundError(f"Input image not found: {image_path}")
+
         img = Image.open(image_path).convert("L")
         x = self.preprocess(img).unsqueeze(0).to(self.device)
 
-        embed_buf = []
-
-        def _hook(_m, _inp, out):
-            embed_buf.append(out.detach())
-
-        handle = self.model.backbone.norm_head.register_forward_hook(_hook)
         cls_logits, seg_logits = self.model(x)
-        handle.remove()
 
-        if not embed_buf:
-            raise RuntimeError("Embedding hook did not capture backbone.norm_head output.")
+        if not hasattr(self.model, "last_feats"):
+            raise RuntimeError("self.model has no attribute 'last_feats'")
 
-        emb = embed_buf[0]
+        if "lsmf_vec" not in self.model.last_feats:
+            raise RuntimeError(
+                "lsmf_vec not found in self.model.last_feats. "
+                "Please make sure the GUI is loading the LSMF+ECA model "
+                "and the model is running with use_lsmf=True."
+            )
+
+        emb = self.model.last_feats["lsmf_vec"]   # [B, 256]
         logits = cls_logits.view(-1).float()
+
         p = torch.sigmoid(logits / float(self.T)).item()
         yhat = int(p >= float(self.THR))
 
@@ -251,12 +259,26 @@ class PneumoRAGPipeline:
         if emb_np.ndim == 1:
             emb_np = emb_np[None, :]
 
+        if emb_np.shape[1] != self.embs.shape[1]:
+            raise RuntimeError(
+                f"Embedding dim mismatch: query D={emb_np.shape[1]} vs library D={self.embs.shape[1]}"
+            )
+
         stem = Path(image_path).stem
         ts = time.strftime("%Y%m%d_%H%M%S")
         overlay_path = str(self.overlay_dir / f"{stem}_{ts}_overlay.png")
-        self.save_seg_overlay_png(image_path, seg_logits, overlay_path)
+
+        self.save_seg_overlay_png(
+            image_path=image_path,
+            seg_logits=seg_logits,
+            out_png=overlay_path,
+            thr=0.5,
+            alpha=0.35,
+            draw_bbox=True
+        )
 
         seg_prob = torch.sigmoid(seg_logits)[0, 0].detach().cpu().numpy()
+
         return {
             "embedding": emb_np,
             "p_calibrated": float(p),

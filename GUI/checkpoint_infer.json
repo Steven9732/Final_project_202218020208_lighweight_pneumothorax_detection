@@ -11,15 +11,15 @@
     0.25
   ],
   "mode": "L",
-  "temperature_T": 0.8587129712104797,
-  "cls_threshold": 0.37,
+  "temperature_T": 0.7161315083503723,
+  "cls_threshold": 0.75,
   "mask_threshold": 0.5,
   "cls_sigmoid": true,
   "seg_sigmoid": true,
   "seed": 42,
   "monitor": "pr_auc",
-  "best_epoch": 44,
-  "best_score": 0.8083324881947749,
-  "saved_time": "2026-02-20 00:38:41",
-  "torch_version": "2.9.0.dev20250716+cu128"
+  "best_epoch": 10,
+  "best_score": 0.9041666498201134,
+  "saved_time": "2026-03-26 11:58:38",
+  "torch_version": "2.8.0+cu128"
 }
