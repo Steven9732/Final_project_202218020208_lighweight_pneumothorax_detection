@@ -19,11 +19,153 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+FINAL_MODEL_INFO = {
+    "model_name": "ConvNeXtV2 + UNet++",
+    "innovation": "ECA-enhancedLesion-Sensitive Multi-Scale Fusion (ECA-LSMF)",
+    "evaluation": "Temp+Threshold model",
+    "temperature": 0.716,
+    "threshold": 0.750,
+}
+
+FINAL_MODEL_METRICS = {
+    "Accuracy": 91.53526970954357,
+    "Precision": 79.15194346289752,
+    "Recall": 83.89513108614233,
+    "F1-Score": 81.45454545454545,
+    "Specificity": 93.71002132096258,
+    "ROC-AUC": 96.41120241489183,
+    "PR-AUC": 89.08149789724244,
+}
 
 def inject_css():
     st.markdown(
         """
         <style>
+        .perf-wrap {
+            background: linear-gradient(180deg, #121A23 0%, #111821 100%);
+            border: 1px solid #22303E;
+            border-radius: 20px;
+            padding: 22px 22px 18px 22px;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.24);
+            margin-bottom: 18px;
+        }
+
+        .perf-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #22303E;
+        }
+
+        .perf-head-left {
+            min-width: 280px;
+        }
+
+        .perf-title {
+            font-size: 1.12rem;
+            font-weight: 750;
+            color: #EAF2F7;
+            margin-bottom: 0.35rem;
+        }
+
+        .perf-subtitle {
+            color: #9CB0BF;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .perf-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .perf-chip {
+            display: inline-block;
+            padding: 0.38rem 0.75rem;
+            border-radius: 999px;
+            border: 1px solid #304252;
+            background: #17212B;
+            color: #C6D7E3;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .perf-row-gap {
+            height: 14px;
+        }
+
+        .metric-card-feature {
+            background: linear-gradient(180deg, #172331 0%, #14202B 100%);
+            border: 1px solid #35516A;
+            border-radius: 18px;
+            padding: 22px 22px;
+            min-height: 142px;
+            box-shadow: 0 8px 22px rgba(0,0,0,0.22);
+        }
+
+        .metric-card-feature .metric-label {
+            color: #9CB6C9;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .metric-card-feature .metric-value {
+            color: #F5FAFD;
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1.12;
+            margin-bottom: 10px;
+        }
+
+        .metric-card-feature .metric-note {
+            color: #9CB0BF;
+            font-size: 0.90rem;
+            line-height: 1.55;
+        }
+
+        .metric-card-compact {
+            background: linear-gradient(180deg, #141D27 0%, #121A23 100%);
+            border: 1px solid #243241;
+            border-radius: 16px;
+            padding: 18px 18px;
+            min-height: 122px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+        }
+
+        .metric-card-compact .metric-label {
+            color: #8EA1B1;
+            font-size: 0.92rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .metric-card-compact .metric-value {
+            color: #F2F7FB;
+            font-size: 1.45rem;
+            font-weight: 780;
+            line-height: 1.15;
+            margin-bottom: 8px;
+        }
+
+        .metric-card-compact .metric-note {
+            color: #93A6B6;
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        .perf-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, #233243 20%, #233243 80%, transparent 100%);
+            margin: 14px 0 6px 0;
+        }
         .stApp {
             background:
                 radial-gradient(circle at top right, rgba(77,163,217,0.10), transparent 22%),
@@ -286,7 +428,115 @@ def render_metric_card(label: str, value: str, note: str = ""):
         unsafe_allow_html=True,
     )
 
+def fmt_pct(x: float) -> str:
+    return f"{x:.2f}%"
 
+def render_model_performance_section():
+    info = FINAL_MODEL_INFO
+    metrics = FINAL_MODEL_METRICS
+
+    st.markdown('<div class="perf-wrap">', unsafe_allow_html=True)
+
+    st.markdown(
+        f"""
+        <div class="perf-head">
+            <div class="perf-head-left">
+                <div class="perf-title">Model Performance</div>
+                <div class="perf-subtitle">
+                    <b>Final model:</b> {info['model_name']}<br>
+                    <b>Innovation:</b> {info['innovation']}<br>
+                    <b>Evaluation:</b> {info['evaluation']}
+                </div>
+            </div>
+            <div class="perf-meta">
+                <span class="perf-chip">Temperature = {info['temperature']:.3f}</span>
+                <span class="perf-chip">Threshold = {info['threshold']:.3f}</span>
+                <span class="perf-chip">Final Test Result</span>
+                <span class="perf-chip">Calibrated Inference</span>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    c1, c2 = st.columns(2, gap="large")
+    with c1:
+        render_feature_metric_card(
+            "Accuracy",
+            fmt_pct(metrics["Accuracy"]),
+            "Overall classification accuracy on the final test setting"
+        )
+    with c2:
+        render_feature_metric_card(
+            "ROC-AUC",
+            fmt_pct(metrics["ROC-AUC"]),
+            "Overall separability between pneumothorax and non-pneumothorax cases"
+        )
+
+    st.markdown('<div class="perf-row-gap"></div>', unsafe_allow_html=True)
+
+    c3, c4, c5 = st.columns(3, gap="large")
+    with c3:
+        render_compact_metric_card(
+            "Precision",
+            fmt_pct(metrics["Precision"]),
+            "Correctness of positive predictions"
+        )
+    with c4:
+        render_compact_metric_card(
+            "Recall",
+            fmt_pct(metrics["Recall"]),
+            "Sensitivity to positive cases"
+        )
+    with c5:
+        render_compact_metric_card(
+            "F1-Score",
+            fmt_pct(metrics["F1-Score"]),
+            "Balanced precision-recall performance"
+        )
+
+    st.markdown('<div class="perf-row-gap"></div>', unsafe_allow_html=True)
+
+    c6, c7 = st.columns(2, gap="large")
+    with c6:
+        render_compact_metric_card(
+            "Specificity",
+            fmt_pct(metrics["Specificity"]),
+            "Recognition of negative cases"
+        )
+    with c7:
+        render_compact_metric_card(
+            "PR-AUC",
+            fmt_pct(metrics["PR-AUC"]),
+            "Positive-class retrieval quality under imbalance"
+        )
+
+    st.markdown("</div>", unsafe_allow_html=True)
+
+def render_feature_metric_card(label: str, value: str, note: str = ""):
+    st.markdown(
+        f"""
+        <div class="metric-card-feature">
+            <div class="metric-label">{label}</div>
+            <div class="metric-value">{value}</div>
+            <div class="metric-note">{note}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_compact_metric_card(label: str, value: str, note: str = ""):
+    st.markdown(
+        f"""
+        <div class="metric-card-compact">
+            <div class="metric-label">{label}</div>
+            <div class="metric-value">{value}</div>
+            <div class="metric-note">{note}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 def summary_label(y_pred: int, narrative: str) -> str:
     if narrative == "indeterminate":
         return "Indeterminate"
@@ -543,6 +793,8 @@ def main():
         """,
         unsafe_allow_html=True,
     )
+
+    render_model_performance_section()
         
 
     if not Path(assets_dir).exists():
