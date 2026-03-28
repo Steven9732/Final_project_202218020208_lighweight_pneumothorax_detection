@@ -224,6 +224,12 @@ def build_user_prompt(payload: dict) -> str:
     payload_json = json.dumps(payload, ensure_ascii=False, indent=2)
     return USER_TMPL.format(payload=payload_json)
 
+def build_prompt_debug(payload: dict) -> dict:
+    return {
+        "system_prompt": SYSTEM,
+        "user_template": USER_TMPL,
+        "final_user_prompt": build_user_prompt(payload),
+    }
 
 def template_report_from_payload(payload: dict) -> dict:
     pred = payload["prediction"]
@@ -385,6 +391,8 @@ class ReportGenerator:
     ):
         payload = pipeline.build_payload(image_path, topk_img=topk_img, topk_text=topk_text)
         report = self.generate_report_safe(payload)
+
+        report["prompt_debug"] = build_prompt_debug(payload)
 
         visual = payload.get("visual_support", {}) or {}
         if "visual_support" not in report:
