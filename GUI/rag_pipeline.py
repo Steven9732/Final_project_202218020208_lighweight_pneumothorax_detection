@@ -12,6 +12,7 @@ import torch
 import torch.nn.functional as F
 import torchvision.transforms as tvT
 from PIL import Image, ImageDraw
+import matplotlib.cm as cm
 
 from ECALSMFModel import ConvNeXtV2TinyScratch
 
@@ -43,6 +44,72 @@ def _l2norm(v: np.ndarray) -> np.ndarray:
     v = v.astype("float32")
     return v / (np.linalg.norm(v, axis=1, keepdims=True) + 1e-12)
 
+class GradCAM:
+    def __init__(self, model, target_layer):
+        self.model = model
+        self.target_layer = target_layer
+        self.activations = None
+        self.gradients = None
+        self.hooks = []
+        self._register_hooks()
+
+    def _register_hooks(self):
+        def forward_hook(module, input, output):
+            self.activations = output
+
+        def backward_hook(module, grad_input, grad_output):
+            self.gradients = grad_output[0]
+
+        self.hooks.append(
+            self.target_layer.register_forward_hook(forward_hook)
+        )
+
+        if hasattr(self.target_layer, "register_full_backward_hook"):
+            self.hooks.append(
+                self.target_layer.register_full_backward_hook(backward_hook)
+            )
+        else:
+            self.hooks.append(
+                self.target_layer.register_backward_hook(backward_hook)
+            )
+
+    def remove_hooks(self):
+        for h in self.hooks:
+            h.remove()
+        self.hooks = []
+
+    def __call__(self, x):
+        self.model.zero_grad(set_to_none=True)
+
+        out = self.model(x)
+        if isinstance(out, tuple):
+            cls_logits, _ = out
+        else:
+            cls_logits = out
+
+        score = cls_logits.view(-1).sum()
+        score.backward()
+
+        grads = self.gradients
+        activs = self.activations
+
+        weights = grads.mean(dim=(2, 3), keepdim=True)
+        cam = (weights * activs).sum(dim=1, keepdim=True)
+        cam = F.relu(cam)
+
+        cam = F.interpolate(
+            cam,
+            size=x.shape[-2:],
+            mode="bilinear",
+            align_corners=False,
+        )
+
+        cam_min = cam.amin(dim=(2, 3), keepdim=True)
+        cam_max = cam.amax(dim=(2, 3), keepdim=True)
+        cam = (cam - cam_min) / (cam_max - cam_min + 1e-8)
+
+        return cam.detach()
+
 
 class PneumoRAGPipeline:
     def __init__(
@@ -60,6 +127,8 @@ class PneumoRAGPipeline:
         self.report_dir.mkdir(parents=True, exist_ok=True)
         self.overlay_dir = self.report_dir / "overlays"
         self.overlay_dir.mkdir(parents=True, exist_ok=True)
+        self.explain_dir = self.report_dir / "explainability"
+        self.explain_dir.mkdir(parents=True, exist_ok=True)
 
         self.device = torch.device(device or ("cuda" if torch.cuda.is_available() else "cpu"))
 
@@ -132,6 +201,14 @@ class PneumoRAGPipeline:
             state = {k.replace("module.", "", 1): v for k, v in state.items()}
         self.model.load_state_dict(state, strict=False)
         self.model.eval()
+
+        target_layer = getattr(self.model, "eca4", None)
+        if target_layer is None:
+            raise RuntimeError(
+                "Grad-CAM target layer 'eca4' not found in current model."
+            )
+
+        self.gradcam = GradCAM(self.model, target_layer)
 
     def _init_retrieval(self):
         self.embs_norm = _l2norm(self.embs)
@@ -231,7 +308,29 @@ class PneumoRAGPipeline:
         blended.save(out_png)
         return out_png
 
-    @torch.no_grad()
+    def save_gradcam_overlay_png(
+        self,
+        image_path: str,
+        cam_tensor: torch.Tensor,
+        out_png: str,
+        alpha: float = 0.45,
+    ) -> str:
+        base = Image.open(image_path).convert("RGB")
+        w, h = base.size
+
+        cam_np = cam_tensor.detach().cpu().numpy()
+        cam_np = np.clip(cam_np, 0.0, 1.0)
+
+        heat_rgb = (cm.jet(cam_np)[..., :3] * 255).astype(np.uint8)
+        heat_img = Image.fromarray(heat_rgb, mode="RGB")
+        heat_img = heat_img.resize((w, h), resample=Image.BILINEAR)
+
+        blended = Image.blend(base, heat_img, float(alpha))
+
+        Path(out_png).parent.mkdir(parents=True, exist_ok=True)
+        blended.save(out_png)
+        return out_png
+
     def infer_one(self, image_path: str):
         image_path = str(image_path)
 
@@ -241,36 +340,44 @@ class PneumoRAGPipeline:
         img = Image.open(image_path).convert("L")
         x = self.preprocess(img).unsqueeze(0).to(self.device)
 
-        cls_logits, seg_logits = self.model(x)
+        with torch.no_grad():
+            cls_logits, seg_logits = self.model(x)
 
-        if not hasattr(self.model, "last_feats"):
-            raise RuntimeError("self.model has no attribute 'last_feats'")
+            if not hasattr(self.model, "last_feats"):
+                raise RuntimeError("self.model has no attribute 'last_feats'")
 
-        if "lsmf_vec" not in self.model.last_feats:
-            raise RuntimeError(
-                "lsmf_vec not found in self.model.last_feats. "
-                "Please make sure the GUI is loading the LSMF+ECA model "
-                "and the model is running with use_lsmf=True."
-            )
+            if "lsmf_vec" not in self.model.last_feats:
+                raise RuntimeError(
+                    "lsmf_vec not found in self.model.last_feats. "
+                    "Please make sure the GUI is loading the LSMF+ECA model "
+                    "and the model is running with use_lsmf=True."
+                )
 
-        emb = self.model.last_feats["lsmf_vec"]   # [B, 256]
-        logits = cls_logits.view(-1).float()
+            emb = self.model.last_feats["lsmf_vec"]
+            logits = cls_logits.view(-1).float()
 
-        p = torch.sigmoid(logits / float(self.T)).item()
-        yhat = int(p >= float(self.THR))
+            p = torch.sigmoid(logits / float(self.T)).item()
+            yhat = int(p >= float(self.THR))
 
-        emb_np = emb.detach().cpu().numpy().astype("float32")
-        if emb_np.ndim == 1:
-            emb_np = emb_np[None, :]
+            emb_np = emb.detach().cpu().numpy().astype("float32")
+            if emb_np.ndim == 1:
+                emb_np = emb_np[None, :]
 
-        if emb_np.shape[1] != self.embs.shape[1]:
-            raise RuntimeError(
-                f"Embedding dim mismatch: query D={emb_np.shape[1]} vs library D={self.embs.shape[1]}"
-            )
+            if emb_np.shape[1] != self.embs.shape[1]:
+                raise RuntimeError(
+                    f"Embedding dim mismatch: query D={emb_np.shape[1]} vs library D={self.embs.shape[1]}"
+                )
+
+            seg_prob = torch.sigmoid(seg_logits)[0, 0].detach().cpu().numpy()
+
+        with torch.enable_grad():
+            cam = self.gradcam(x)[0, 0].cpu()
 
         stem = Path(image_path).stem
         ts = time.strftime("%Y%m%d_%H%M%S")
+
         overlay_path = str(self.overlay_dir / f"{stem}_{ts}_overlay.png")
+        gradcam_overlay_path = str(self.explain_dir / f"{stem}_{ts}_gradcam_overlay.png")
 
         self.save_seg_overlay_png(
             image_path=image_path,
@@ -278,16 +385,22 @@ class PneumoRAGPipeline:
             out_png=overlay_path,
             thr=0.5,
             alpha=0.35,
-            draw_bbox=True
+            draw_bbox=True,
         )
 
-        seg_prob = torch.sigmoid(seg_logits)[0, 0].detach().cpu().numpy()
+        self.save_gradcam_overlay_png(
+            image_path=image_path,
+            cam_tensor=cam,
+            out_png=gradcam_overlay_path,
+            alpha=0.45,
+        )
 
         return {
             "embedding": emb_np,
             "p_calibrated": float(p),
             "y_pred": int(yhat),
             "overlay_path": overlay_path,
+            "gradcam_overlay_path": gradcam_overlay_path,
             "seg_prob_small": seg_prob,
             "cls_logits": float(logits.item()),
         }
@@ -423,6 +536,13 @@ class PneumoRAGPipeline:
             "temperature_T": float(self.T),
             "overlay_path": pack["overlay_path"],
             "overlay_filename": os.path.basename(pack["overlay_path"]) if pack["overlay_path"] else None,
+            "overlay_path": pack["overlay_path"],
+            "overlay_filename": os.path.basename(pack["overlay_path"]) if pack["overlay_path"] else None,
+            "gradcam_overlay_path": pack.get("gradcam_overlay_path"),
+            "gradcam_overlay_filename": (
+                os.path.basename(pack["gradcam_overlay_path"])
+                if pack.get("gradcam_overlay_path") else None
+            ),
             "similar_cases": similar_public,
             "retrieved_case_ids": retrieved_case_ids,
             # "debug": {
@@ -683,6 +803,8 @@ class PneumoRAGPipeline:
 
         overlay_path = pack.get("overlay_path")
         overlay_filename = pack.get("overlay_filename")
+        gradcam_overlay_path = pack.get("gradcam_overlay_path")
+        gradcam_overlay_filename = pack.get("gradcam_overlay_filename")
 
         return {
             "task": "pneumothorax_binary_classification",
@@ -722,6 +844,15 @@ class PneumoRAGPipeline:
                 "overlay_note": (
                     "An accompanying visual overlay highlights the model-identified region of interest for review."
                     if overlay_path else ""
+                ),
+            },
+            "explainability": {
+                "gradcam_available": bool(gradcam_overlay_path),
+                "gradcam_overlay_path": gradcam_overlay_path,
+                "gradcam_overlay_filename": gradcam_overlay_filename,
+                "gradcam_note": (
+                    "Grad-CAM overlay highlights the image regions that most influenced the classification decision."
+                    if gradcam_overlay_path else ""
                 ),
             },
         }

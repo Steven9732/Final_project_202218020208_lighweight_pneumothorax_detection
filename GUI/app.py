@@ -753,6 +753,16 @@ def render_pipeline_overview(payload: dict, report: dict):
     st.markdown("**Image Retrieval Behaviour Context**")
     st.json(image_rag.get("behaviour_context", {}), expanded=False)
 
+def render_gradcam_panel(gradcam_overlay_path: str, note: str = ""):
+    if not gradcam_overlay_path or not Path(gradcam_overlay_path).exists():
+        return
+
+    st.markdown('<div class="section-card">', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">Model Explainability</div>', unsafe_allow_html=True)
+    st.image(gradcam_overlay_path, use_container_width=True)
+    if note:
+        st.caption(note)
+    st.markdown("</div>", unsafe_allow_html=True)
 
 def main():
     inject_css()
@@ -827,6 +837,8 @@ def main():
             img = Image.open(uploaded).convert("RGB")
             st.image(img, use_container_width=True)
 
+        gradcam_slot = st.empty()
+
     if uploaded is not None and run_clicked:
         temp_path = pipeline.save_uploaded_bytes(uploaded.name, uploaded.getvalue())
 
@@ -853,6 +865,12 @@ def main():
         prompt_debug = report.get("prompt_debug", {})
         used_chunk_ids = report.get("evidence", {}).get("text_chunk_ids", [])
         used_case_ids = report.get("evidence", {}).get("retrieved_case_ids", [])
+        explain = report.get("explainability", {}) or {}
+        gradcam_overlay_path = explain.get("gradcam_overlay_path")
+        gradcam_note = explain.get("gradcam_note", "")
+
+        with gradcam_slot.container():
+            render_gradcam_panel(gradcam_overlay_path, gradcam_note)
 
         with right:
             render_decision_banner(decision_text, p_cal, confidence)
