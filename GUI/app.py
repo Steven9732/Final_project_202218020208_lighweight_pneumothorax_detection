@@ -345,49 +345,163 @@ def render_report_sections(report_text: str):
         st.markdown(f'<div class="report-heading">{title}</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="report-body">{body.strip()}</div>', unsafe_allow_html=True)
 
-def render_case_card(case: dict, idx: int):
+def resolve_case_image_path(case: dict, assets_dir: str | None = None):
+    candidate_keys = [
+        "image_path",
+        "img_path",
+        "path",
+        "file_path",
+        "png_path",
+        "source_image_path",
+        "retrieved_image_path",
+    ]
+
+    for key in candidate_keys:
+        p = case.get(key)
+        if not p:
+            continue
+
+        p = Path(str(p))
+
+        if p.exists():
+            return str(p)
+
+        if assets_dir is not None:
+            p2 = Path(assets_dir) / p
+            if p2.exists():
+                return str(p2)
+
+    return None
+
+def render_case_card(case: dict, idx: int, used_case_ids=None, assets_dir: str | None = None):
+    used_case_ids = set(map(str, used_case_ids or []))
+
     case_id = case.get("case_id", f"Case {idx}")
     sim = case.get("sim", None)
     label = case.get("label", case.get("y_true", "N/A"))
     pred = case.get("pred_label", case.get("y_pred", "N/A"))
 
     sim_text = f"{sim:.4f}" if isinstance(sim, (int, float)) else "N/A"
+    img_path = resolve_case_image_path(case, assets_dir=assets_dir)
 
-    st.markdown(
-        f"""
-        <div class="case-card">
-            <div class="case-title">Retrieved Case {idx}: {case_id}</div>
-            <div class="case-meta">
-                Similarity: <b>{sim_text}</b><br>
-                Reference label: <b>{label}</b><br>
-                Retrieved prediction: <b>{pred}</b>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    col_img, col_meta = st.columns([1.0, 1.35], gap="large")
 
-def render_chunk_card(chunk: dict):
+    with col_img:
+        if img_path and Path(img_path).exists():
+            st.image(img_path, use_container_width=True)
+        else:
+            st.info("No displayable image found for this retrieved case.")
+
+    with col_meta:
+        st.markdown(f"**Retrieved Case {idx}:** {case_id}")
+        st.markdown(f"**Similarity:** {sim_text}")
+        st.markdown(f"**Reference label:** {label}")
+        st.markdown(f"**Retrieved prediction:** {pred}")
+
+        if str(case_id) in used_case_ids:
+            st.success("Used in report")
+
+def render_chunk_card(chunk: dict, used_chunk_ids=None):
+    used_chunk_ids = set(map(str, used_chunk_ids or []))
+
     chunk_id = chunk.get("chunk_id", "N/A")
     tags = ", ".join(chunk.get("tags", [])) if chunk.get("tags") else "N/A"
     score = float(chunk.get("score", 0))
     sim = float(chunk.get("sim", 0))
     text = chunk.get("text", "")
 
-    st.markdown(
-        f"""
-        <div class="chunk-card">
-            <div class="case-title">{chunk_id}</div>
-            <div class="case-meta">
-                Tags: <b>{tags}</b><br>
-                Score: <b>{score:.4f}</b> &nbsp;&nbsp;|&nbsp;&nbsp;
-                Similarity: <b>{sim:.4f}</b>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    st.markdown(f"**Chunk ID:** {chunk_id}")
+    st.markdown(f"**Tags:** {tags}")
+    st.markdown(f"**Score:** {score:.4f} | **Similarity:** {sim:.4f}")
+
+    if str(chunk_id) in used_chunk_ids:
+        st.success("Used in report")
+
     st.write(text)
+
+def render_badges(items):
+    if items:
+        st.markdown(
+            "".join([f'<span class="badge">{x}</span>' for x in items]),
+            unsafe_allow_html=True,
+        )
+    else:
+        st.caption("None")
+
+def render_rag_summary(payload: dict, report: dict):
+    image_rag = payload.get("image_rag", {}) or {}
+    text_rag = payload.get("text_rag", {}) or {}
+    summary = image_rag.get("summary", {}) or {}
+    ctx = image_rag.get("behaviour_context", {}) or {}
+    ev = report.get("evidence", {}) or {}
+
+    num_cases = summary.get("num_cases", 0)
+    mean_sim = summary.get("mean_similarity", None)
+    text_chunks = text_rag.get("evidence_chunks", []) or []
+    used_count = len(ev.get("text_chunk_ids", []) or []) + len(ev.get("retrieved_case_ids", []) or [])
+
+    c1, c2, c3, c4 = st.columns(4)
+
+    with c1:
+        render_metric_card("Retrieved Cases", str(num_cases), "Top-k image retrieval results")
+
+    with c2:
+        render_metric_card(
+            "Mean Similarity",
+            f"{mean_sim:.3f}" if isinstance(mean_sim, (int, float)) else "N/A",
+            f"State = {ctx.get('retrieval_state', 'n/a')}"
+        )
+
+    with c3:
+        render_metric_card("Text Chunks", str(len(text_chunks)), "Retrieved evidence text")
+
+    with c4:
+        render_metric_card("Evidence Used", str(used_count), "Items cited by final report")
+
+def render_prompt_block(title: str, content: str):
+    with st.expander(title, expanded=False):
+        if content:
+            st.code(content, language="text")
+        else:
+            st.info("Not available.")
+
+def render_pipeline_overview(payload: dict, report: dict):
+    text_rag = payload.get("text_rag", {}) or {}
+    image_rag = payload.get("image_rag", {}) or {}
+    pred = payload.get("prediction", {}) or {}
+    ev = report.get("evidence", {}) or {}
+
+    st.markdown("**Pipeline Flow**")
+    st.caption(
+        "Input image → CNN inference → image retrieval → text retrieval → prompt assembly → LLM report → safety check"
+    )
+
+    render_rag_summary(payload, report)
+
+    st.markdown("**Prediction Context**")
+    st.json(
+        {
+            "y_pred": pred.get("y_pred"),
+            "narrative_label": pred.get("narrative_label"),
+            "confidence_band": pred.get("confidence_band"),
+        },
+        expanded=True,
+    )
+
+    st.markdown("**Text Retrieval Query**")
+    st.code(text_rag.get("query", "N/A"), language="text")
+
+    st.markdown("**Retrieval Scenario**")
+    st.json(text_rag.get("scenario", {}), expanded=True)
+
+    st.markdown("**Evidence Used in Final Report**")
+    st.markdown("Text chunk IDs")
+    render_badges(ev.get("text_chunk_ids", []))
+    st.markdown("Retrieved case IDs")
+    render_badges(ev.get("retrieved_case_ids", []))
+
+    st.markdown("**Image Retrieval Behaviour Context**")
+    st.json(image_rag.get("behaviour_context", {}), expanded=False)
 
 
 def main():
@@ -395,7 +509,7 @@ def main():
 
     st.markdown(
         """
-        <div class="glass">
+        <div class="top-hero">
             <div class="title-xl">PneumoAssist</div>
             <div class="subtitle">
                 Lightweight pneumothorax detection with retrieval-augmented evidence and structured LLM reporting.
@@ -415,6 +529,10 @@ def main():
             topk_img = st.slider("Top-k image retrieval", min_value=3, max_value=10, value=5, step=1)
             topk_text = st.slider("Top-k text evidence", min_value=3, max_value=6, value=6, step=1)
             save_report = st.toggle("Save report JSON", value=True)
+
+            defense_mode = st.toggle("Defense mode", value=True)
+            show_prompt_tab = st.toggle("Show prompt tab", value=True)
+            # show_payload_json = st.toggle("Show payload JSON", value=False)
 
     st.markdown(
         """
@@ -437,8 +555,7 @@ def main():
     left, right = st.columns([1.1, 1.4], gap="large")
 
     with left:
-        st.markdown('<div class="section-card">', unsafe_allow_html=True)
-        st.markdown('<div class="section-title">Input Image</div>', unsafe_allow_html=True)
+        st.subheader("Input Image")
 
         uploaded = st.file_uploader(
             "Upload chest X-ray",
@@ -457,8 +574,6 @@ def main():
         if uploaded is not None:
             img = Image.open(uploaded).convert("RGB")
             st.image(img, use_container_width=True)
-
-        st.markdown("</div>", unsafe_allow_html=True)
 
     if uploaded is not None and run_clicked:
         temp_path = pipeline.save_uploaded_bytes(uploaded.name, uploaded.getvalue())
@@ -483,6 +598,9 @@ def main():
         confidence = pred["confidence_band"]
         narrative = pred["narrative_label"]
         decision_text = summary_label(y_pred, narrative)
+        prompt_debug = report.get("prompt_debug", {})
+        used_chunk_ids = report.get("evidence", {}).get("text_chunk_ids", [])
+        used_case_ids = report.get("evidence", {}).get("retrieved_case_ids", [])
 
         with right:
             render_decision_banner(decision_text, p_cal, confidence)
@@ -517,7 +635,9 @@ def main():
                     st.caption(note)
                 st.markdown("</div>", unsafe_allow_html=True)
 
-        tab1, tab2, tab3, tab4 = st.tabs(["Structured Report", "Image Retrieval", "Text Evidence", "Export"])
+        tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(
+            ["Structured Report", "RAG Overview", "Image Retrieval", "Text Evidence", "Prompt", "Export"]
+        )
 
         with tab1:
             # st.markdown('<div class="glass">', unsafe_allow_html=True)
@@ -557,16 +677,29 @@ def main():
                 st.info("Template report was used because no live LLM API key was available or the API call failed.")
             if report.get("llm_error"):
                 st.caption(f"LLM note: {report['llm_error']}")
-            st.markdown("</div>", unsafe_allow_html=True)
 
         with tab2:
             st.markdown('<div class="section-card">', unsafe_allow_html=True)
+            st.markdown('<div class="section-title">RAG Overview</div>', unsafe_allow_html=True)
+
+            render_pipeline_overview(payload, report)
+
+            st.markdown("</div>", unsafe_allow_html=True)
+
+        with tab3:
             st.markdown('<div class="section-title">Retrieved Similar Cases</div>', unsafe_allow_html=True)
 
             sim_cases = payload.get("image_rag", {}).get("similar_cases", [])
+
             if sim_cases:
                 for i, case in enumerate(sim_cases, start=1):
-                    render_case_card(case, i)
+                    render_case_card(
+                        case,
+                        i,
+                        used_case_ids=used_case_ids,
+                        assets_dir=assets_dir,
+                    )
+                    st.divider()
             else:
                 st.info("No similar cases available.")
 
@@ -577,29 +710,41 @@ def main():
                 f"Agreement rate: {ctx.get('agreement_rate', 'n/a')}"
             )
 
-            st.markdown("</div>", unsafe_allow_html=True)
-
-        with tab3:
-            st.markdown('<div class="section-card">', unsafe_allow_html=True)
+        with tab4:
+            # st.markdown('<div class="section-card">', unsafe_allow_html=True)
             st.markdown('<div class="section-title">Text Evidence</div>', unsafe_allow_html=True)
 
             text_chunks = payload.get("text_rag", {}).get("evidence_chunks", [])
             if text_chunks:
                 for chunk in text_chunks:
-                    render_chunk_card(chunk)
+                    render_chunk_card(chunk, used_chunk_ids=used_chunk_ids)
                     st.divider()
             else:
                 st.info("No text evidence retrieved.")
 
+            # st.markdown("</div>", unsafe_allow_html=True)
+
+        with tab5:
+            st.markdown('<div class="section-card">', unsafe_allow_html=True)
+            st.markdown('<div class="section-title">Prompt Transparency</div>', unsafe_allow_html=True)
+
+            if show_prompt_tab:
+                render_prompt_block("System Prompt", prompt_debug.get("system_prompt", ""))
+                render_prompt_block("User Prompt Template", prompt_debug.get("user_template", ""))
+                render_prompt_block("Final User Prompt for This Case", prompt_debug.get("final_user_prompt", ""))
+            else:
+                st.info("Prompt display is disabled.")
+
             st.markdown("</div>", unsafe_allow_html=True)
 
-        with tab4:
+        with tab6:
             st.markdown('<div class="section-card">', unsafe_allow_html=True)
             st.markdown('<div class="section-title">Export</div>', unsafe_allow_html=True)
 
             export_obj = {
                 "report": report,
                 "payload": payload,
+                "prompt_debug": prompt_debug,
                 "saved_json_path": out_path,
             }
             export_str = json.dumps(export_obj, ensure_ascii=False, indent=2)
@@ -614,6 +759,10 @@ def main():
 
             if out_path:
                 st.success(f"Saved to: {out_path}")
+
+            # if show_payload_json:
+            #     st.markdown("**Payload JSON**")
+            #     st.json(payload, expanded=False)
 
             st.markdown("</div>", unsafe_allow_html=True)
 

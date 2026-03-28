@@ -52,6 +52,10 @@ class PneumoRAGPipeline:
         device: str | None = None,
     ):
         self.assets_dir = Path(assets_dir)
+        self.image_root = Path(
+        os.getenv("PNEUMO_IMAGE_ROOT", r"C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images")
+        )
+        self.autodl_image_prefix = "/root/autodl-tmp/myproject/data/Datasets/Dataset_1/Chest X-Ray Images with Pneumothorax Masks/png_images"
         self.report_dir = Path(report_dir or (self.assets_dir / "streamlit_outputs"))
         self.report_dir.mkdir(parents=True, exist_ok=True)
         self.overlay_dir = self.report_dir / "overlays"
@@ -317,21 +321,83 @@ class PneumoRAGPipeline:
 
     def shrink_hits_for_llm(self, hits_df: pd.DataFrame, topk: int):
         out = []
+
         for _, row in hits_df.head(topk).iterrows():
+            raw_path = None
+            if self.PATH_COL and self.PATH_COL in hits_df.columns:
+                raw_path = row[self.PATH_COL]
+
+            case_id = (
+                str(row[self.CASEID_COL])
+                if (self.CASEID_COL and self.CASEID_COL in hits_df.columns)
+                else self.get_case_id_from_path(raw_path if raw_path is not None else "")
+            )
+
+            resolved_path = self.resolve_existing_image_path(raw_path)
+
             item = {
-                "case_id": str(row[self.CASEID_COL]) if (self.CASEID_COL and self.CASEID_COL in hits_df.columns)
-                else self.get_case_id_from_path(row[self.PATH_COL]),
+                "case_id": case_id,
                 "sim": float(row["sim"]) if "sim" in hits_df.columns else None,
+                # "raw_image_path": str(raw_path) if raw_path is not None and pd.notna(raw_path) else None,
+                "image_path": resolved_path,
+                # "image_exists": bool(resolved_path and Path(resolved_path).exists()),
             }
-            for c in ["p_calibrated", "p", "prob", "y_pred", "pred", "logit", "y_true"]:
-                if c in hits_df.columns:
-                    v = row[c]
-                    try:
-                        item[c] = int(v) if c in ["y_pred", "pred", "y_true"] else float(v)
-                    except Exception:
-                        item[c] = str(v)
+
+            if self.YTRUE_COL and self.YTRUE_COL in hits_df.columns:
+                v = row[self.YTRUE_COL]
+                try:
+                    item["label"] = int(v)
+                except Exception:
+                    item["label"] = str(v)
+
+            if self.YPRED_COL and self.YPRED_COL in hits_df.columns:
+                v = row[self.YPRED_COL]
+                try:
+                    item["pred_label"] = int(v)
+                except Exception:
+                    item["pred_label"] = str(v)
+
+            if self.PCOL and self.PCOL in hits_df.columns:
+                v = row[self.PCOL]
+                try:
+                    item["retrieved_probability"] = float(v)
+                except Exception:
+                    item["retrieved_probability"] = str(v)
+
             out.append(item)
+
         return out
+    
+    def resolve_existing_image_path(self, raw_path) -> str | None:
+        if raw_path is None:
+            return None
+
+        try:
+            if pd.isna(raw_path):
+                return None
+        except Exception:
+            pass
+
+        raw = str(raw_path).strip()
+        if not raw:
+            return None
+
+        p = Path(raw)
+        if p.exists():
+            return str(p)
+
+        name = p.name
+        if name:
+            candidate = self.image_root / name
+            if candidate.exists():
+                return str(candidate)
+
+        if self.image_root.exists() and name:
+            matches = list(self.image_root.rglob(name))
+            if matches:
+                return str(matches[0])
+
+        return None
 
     def image_rag_for_image(self, image_path: str, topk: int = 5):
         pack = self.embed_and_predict(image_path)
@@ -347,6 +413,9 @@ class PneumoRAGPipeline:
         similar_public = self.shrink_hits_for_llm(hits, topk=topk)
         retrieved_case_ids = [x.get("case_id") for x in similar_public if isinstance(x, dict)]
 
+        # first_img = similar_public[0].get("image_path") if similar_public else None
+        # first_exists = similar_public[0].get("image_exists") if similar_public else None
+
         return {
             "p_calibrated": float(pack["p_calibrated"]),
             "y_pred": int(pack["y_pred"]),
@@ -356,9 +425,12 @@ class PneumoRAGPipeline:
             "overlay_filename": os.path.basename(pack["overlay_path"]) if pack["overlay_path"] else None,
             "similar_cases": similar_public,
             "retrieved_case_ids": retrieved_case_ids,
-            "debug": {
-                "sim_mean": float(hits["sim"].mean()) if "sim" in hits.columns else None,
-            },
+            # "debug": {
+            #     "sim_mean": float(hits["sim"].mean()) if "sim" in hits.columns else None,
+            #     "path_col": self.PATH_COL,
+            #     "first_similar_image_path": first_img,
+            #     "first_similar_image_exists": first_exists,
+            # },
         }
 
     def chunk_allowed_for_report(self, item: dict) -> bool:
