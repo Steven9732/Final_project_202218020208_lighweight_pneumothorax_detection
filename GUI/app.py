@@ -435,7 +435,7 @@ def render_model_performance_section():
     info = FINAL_MODEL_INFO
     metrics = FINAL_MODEL_METRICS
 
-    st.markdown('<div class="perf-wrap">', unsafe_allow_html=True)
+    # st.markdown('<div class="perf-wrap">', unsafe_allow_html=True)
 
     st.markdown(
         f"""
@@ -757,12 +757,12 @@ def render_gradcam_panel(gradcam_overlay_path: str, note: str = ""):
     if not gradcam_overlay_path or not Path(gradcam_overlay_path).exists():
         return
 
-    st.markdown('<div class="section-card">', unsafe_allow_html=True)
+    # st.markdown('<div class="section-card">', unsafe_allow_html=True)
     st.markdown('<div class="section-title">Model Explainability</div>', unsafe_allow_html=True)
     st.image(gradcam_overlay_path, use_container_width=True)
     if note:
         st.caption(note)
-    st.markdown("</div>", unsafe_allow_html=True)
+    # st.markdown("</div>", unsafe_allow_html=True)
 
 def main():
     inject_css()
@@ -897,13 +897,13 @@ def main():
 
             overlay_path = report.get("visual_support", {}).get("overlay_path")
             if overlay_path and Path(overlay_path).exists():
-                st.markdown('<div class="section-card">', unsafe_allow_html=True)
+                # st.markdown('<div class="section-card">', unsafe_allow_html=True)
                 st.markdown('<div class="section-title">Visual Support</div>', unsafe_allow_html=True)
                 st.image(overlay_path, use_container_width=True)
                 note = report.get("visual_support", {}).get("overlay_note", "")
                 if note:
                     st.caption(note)
-                st.markdown("</div>", unsafe_allow_html=True)
+                # st.markdown("</div>", unsafe_allow_html=True)
 
         tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(
             ["Structured Report", "RAG Overview", "Image Retrieval", "Text Evidence", "Prompt", "Export"]
@@ -949,12 +949,12 @@ def main():
                 st.caption(f"LLM note: {report['llm_error']}")
 
         with tab2:
-            st.markdown('<div class="section-card">', unsafe_allow_html=True)
+            # st.markdown('<div class="section-card">', unsafe_allow_html=True)
             st.markdown('<div class="section-title">RAG Overview</div>', unsafe_allow_html=True)
 
             render_pipeline_overview(payload, report)
 
-            st.markdown("</div>", unsafe_allow_html=True)
+            # st.markdown("</div>", unsafe_allow_html=True)
 
         with tab3:
             st.markdown('<div class="section-title">Retrieved Similar Cases</div>', unsafe_allow_html=True)
@@ -995,7 +995,7 @@ def main():
             # st.markdown("</div>", unsafe_allow_html=True)
 
         with tab5:
-            st.markdown('<div class="section-card">', unsafe_allow_html=True)
+            # st.markdown('<div class="section-card">', unsafe_allow_html=True)
             st.markdown('<div class="section-title">Prompt Transparency</div>', unsafe_allow_html=True)
 
             if show_prompt_tab:
@@ -1005,10 +1005,10 @@ def main():
             else:
                 st.info("Prompt display is disabled.")
 
-            st.markdown("</div>", unsafe_allow_html=True)
+            # st.markdown("</div>", unsafe_allow_html=True)
 
         with tab6:
-            st.markdown('<div class="section-card">', unsafe_allow_html=True)
+            # st.markdown('<div class="section-card">', unsafe_allow_html=True)
             st.markdown('<div class="section-title">Export</div>', unsafe_allow_html=True)
 
             export_obj = {
@@ -1034,7 +1034,7 @@ def main():
             #     st.markdown("**Payload JSON**")
             #     st.json(payload, expanded=False)
 
-            st.markdown("</div>", unsafe_allow_html=True)
+            # st.markdown("</div>", unsafe_allow_html=True)
 
 
 if __name__ == "__main__":
