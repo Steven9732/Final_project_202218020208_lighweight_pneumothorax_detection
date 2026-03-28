@@ -403,6 +403,15 @@ class ReportGenerator:
                 "overlay_note": visual.get("overlay_note", ""),
             }
 
+        explain = payload.get("explainability", {}) or {}
+        if "explainability" not in report:
+            report["explainability"] = {
+                "gradcam_available": bool(explain.get("gradcam_available", False)),
+                "gradcam_overlay_path": explain.get("gradcam_overlay_path"),
+                "gradcam_overlay_filename": explain.get("gradcam_overlay_filename"),
+                "gradcam_note": explain.get("gradcam_note", ""),
+            }
+
         out_path = None
         if save:
             report_dir = Path(pipeline.report_dir) / "reports"
