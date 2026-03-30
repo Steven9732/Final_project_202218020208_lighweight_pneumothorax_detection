@@ -369,4 +369,4 @@ APP_CSS = r"""
 
 
 def inject_css() -> None:
-    st.markdown(f"<style>{APP_CSS}</style>", unsafe_allow_html=True)
+    st.markdown(APP_CSS, unsafe_allow_html=True)

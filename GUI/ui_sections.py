@@ -6,6 +6,9 @@ from typing import Any
 
 import streamlit as st
 
+BASE_DIR = Path(__file__).resolve().parent
+PERFORMANCE_DIR = BASE_DIR / "performance"
+
 from ui_components import (
     fmt_pct,
     render_badges,
@@ -17,16 +20,30 @@ from ui_components import (
     render_prompt_block,
     render_report_sections,
 )
-from ui_constants import FINAL_MODEL_INFO, FINAL_MODEL_METRICS
+from ui_constants import (
+    FINAL_MODEL_INFO,
+    FINAL_MODEL_METRICS,
+    PERFORMANCE_IMAGE_DIR,
+    ROC_CURVE_FILE,
+    PR_CURVE_FILE,
+    LOSS_CURVE_FILE,
+    LEARNING_CURVE_FILE,
+)
 
 
-def render_hero() -> None:
+def render_hero(page: str = "Diagnosis") -> None:
+    subtitle_map = {
+        "Diagnosis": "Upload chest X-ray images and generate calibrated prediction, explainability, and structured report.",
+        "Model Performance": "Review summary metrics together with ROC and PR analysis for the final calibrated model.",
+        "Training Dynamics": "Inspect convergence behaviour, loss trend, and learning stability across training.",
+    }
+
     st.markdown(
-        """
+        f"""
         <div class="top-hero">
             <div class="title-xl">PneumoAssist</div>
             <div class="subtitle">
-                Lightweight pneumothorax detection with retrieval-augmented evidence and structured LLM reporting.
+                {subtitle_map.get(page, subtitle_map["Diagnosis"])}
             </div>
         </div>
         """,
@@ -304,3 +321,41 @@ def render_export_tab(
 
     if saved_json_path:
         st.success(f"Saved to: {saved_json_path}")
+
+def render_image_if_exists(image_path: Path, empty_message: str) -> None:
+    if image_path.exists():
+        st.image(str(image_path), use_container_width=True)
+    else:
+        st.info(empty_message)
+
+def render_model_performance_page() -> None:
+    # st.markdown('<div class="section-title">Model Performance</div>', unsafe_allow_html=True)
+
+    render_model_performance_section()
+
+    st.markdown("### Confusion Matrix")
+    render_curve_image("cm.png", "Confusion matrix image not found.")
+
+    st.markdown("### ROC Curve")
+    render_curve_image("roc_curve.png", "ROC curve image not found.")
+
+    st.markdown("### PR Curve")
+    render_curve_image("pr_curve.png", "PR curve image not found.")
+
+def render_training_dynamics_page() -> None:
+    st.markdown('<div class="section-title">Training Dynamics</div>', unsafe_allow_html=True)
+
+    st.markdown("### Loss Curve")
+    render_curve_image("loss_curve.png", "Loss curve image not found.")
+
+    st.markdown("### Learning Curve")
+    render_curve_image("learning_curve.png", "Learning curve image not found.")
+
+def render_curve_image(image_name: str, empty_message: str) -> None:
+    image_path = PERFORMANCE_DIR / image_name
+
+    # st.caption(f"Looking for: {image_path}")
+    if image_path.exists():
+        st.image(str(image_path), use_container_width=True)
+    else:
+        st.info(empty_message)

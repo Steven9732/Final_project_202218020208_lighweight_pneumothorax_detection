@@ -10,17 +10,24 @@ from PIL import Image
 from rag_pipeline import PneumoRAGPipeline
 from report_generator import ReportGenerator
 from ui_components import render_decision_banner, render_gradcam_panel, render_metric_card, summary_label
-from ui_constants import APP_ICON, APP_LAYOUT, APP_SIDEBAR_STATE, APP_TITLE
+from ui_constants import (
+    APP_ICON,
+    APP_LAYOUT,
+    APP_SIDEBAR_STATE,
+    APP_TITLE,
+    NAVIGATION_PAGES,
+)
 from ui_sections import (
     render_disclaimer,
     render_export_tab,
     render_hero,
     render_image_retrieval_tab,
-    render_model_performance_section,
+    render_model_performance_page,
     render_prompt_tab,
     render_rag_overview_tab,
     render_structured_report_tab,
     render_text_evidence_tab,
+    render_training_dynamics_page,
 )
 from ui_styles import inject_css
 
@@ -35,6 +42,7 @@ st.set_page_config(
 
 @dataclass(slots=True)
 class SidebarSettings:
+    page: str
     assets_dir: str
     topk_img: int
     topk_text: int
@@ -64,6 +72,12 @@ def render_sidebar() -> SidebarSettings:
         st.markdown("## PneumoAssist")
         st.caption("Clinical decision-support interface")
 
+        page = st.radio(
+            "Navigation",
+            NAVIGATION_PAGES,
+            index=0,
+        )
+
         with st.expander("Advanced Settings", expanded=False):
             assets_dir = st.text_input("Assets directory", value=default_assets)
             topk_img = st.slider("Top-k image retrieval", min_value=3, max_value=10, value=5, step=1)
@@ -73,6 +87,7 @@ def render_sidebar() -> SidebarSettings:
             show_prompt_tab = st.toggle("Show prompt tab", value=True)
 
     return SidebarSettings(
+        page=page,
         assets_dir=assets_dir,
         topk_img=topk_img,
         topk_text=topk_text,
@@ -216,14 +231,7 @@ def render_tabs(
         )
 
 
-def main() -> None:
-    inject_css()
-    render_hero()
-
-    settings = render_sidebar()
-    render_disclaimer()
-    render_model_performance_section()
-
+def render_diagnosis_page(settings: SidebarSettings) -> None:
     if not Path(settings.assets_dir).exists():
         st.error(f"Assets directory not found: {settings.assets_dir}")
         st.stop()
@@ -232,6 +240,7 @@ def main() -> None:
     reporter = load_report_generator()
 
     left, right = st.columns([1.1, 1.4], gap="large")
+
     with left:
         uploaded, run_clicked, gradcam_slot = render_input_panel()
 
@@ -260,6 +269,22 @@ def main() -> None:
         used_case_ids=used_case_ids,
         prompt_debug=prompt_debug,
     )
+
+def main() -> None:
+    inject_css()
+
+    settings = render_sidebar()
+    render_hero(settings.page)
+    render_disclaimer()
+
+    if settings.page == "Diagnosis":
+        render_diagnosis_page(settings)
+
+    elif settings.page == "Model Performance":
+        render_model_performance_page()
+
+    elif settings.page == "Training Dynamics":
+        render_training_dynamics_page()
 
 
 if __name__ == "__main__":
