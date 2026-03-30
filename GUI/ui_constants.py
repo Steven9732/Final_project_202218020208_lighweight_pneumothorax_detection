@@ -41,3 +41,16 @@ CASE_IMAGE_KEYS = [
     "source_image_path",
     "retrieved_image_path",
 ]
+
+NAVIGATION_PAGES = [
+    "Diagnosis",
+    "Model Performance",
+    "Training Dynamics",
+]
+
+PERFORMANCE_IMAGE_DIR = "performance"
+
+ROC_CURVE_FILE = "roc_curve.png"
+PR_CURVE_FILE = "pr_curve.png"
+LOSS_CURVE_FILE = "loss_curve.png"
+LEARNING_CURVE_FILE = "learning_curve.png"
