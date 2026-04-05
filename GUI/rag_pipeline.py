@@ -379,14 +379,19 @@ class PneumoRAGPipeline:
         overlay_path = str(self.overlay_dir / f"{stem}_{ts}_overlay.png")
         gradcam_overlay_path = str(self.explain_dir / f"{stem}_{ts}_gradcam_overlay.png")
 
-        self.save_seg_overlay_png(
-            image_path=image_path,
-            seg_logits=seg_logits,
-            out_png=overlay_path,
-            thr=0.5,
-            alpha=0.35,
-            draw_bbox=True,
-        )
+        if yhat == 1:
+            self.save_seg_overlay_png(
+                image_path=image_path,
+                seg_logits=seg_logits,
+                out_png=overlay_path,
+                thr=0.5,
+                alpha=0.35,
+                draw_bbox=True,
+            )
+        else:
+            base = Image.open(image_path).convert("RGB")
+            Path(overlay_path).parent.mkdir(parents=True, exist_ok=True)
+            base.save(overlay_path)
 
         self.save_gradcam_overlay_png(
             image_path=image_path,
