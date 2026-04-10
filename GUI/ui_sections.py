@@ -6,9 +6,6 @@ from typing import Any
 
 import streamlit as st
 
-BASE_DIR = Path(__file__).resolve().parent
-PERFORMANCE_DIR = BASE_DIR / "performance"
-
 from ui_components import (
     fmt_pct,
     render_badges,
@@ -23,13 +20,15 @@ from ui_components import (
 from ui_constants import (
     FINAL_MODEL_INFO,
     FINAL_MODEL_METRICS,
-    PERFORMANCE_IMAGE_DIR,
+    PERFORMANCE_SUBDIR,
     ROC_CURVE_FILE,
     PR_CURVE_FILE,
     LOSS_CURVE_FILE,
     LEARNING_CURVE_FILE,
 )
 
+BASE_DIR = Path(__file__).resolve().parent
+PERFORMANCE_DIR = BASE_DIR / "performance" / PERFORMANCE_SUBDIR
 
 def render_hero(page: str = "Diagnosis") -> None:
     subtitle_map = {

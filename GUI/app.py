@@ -62,7 +62,8 @@ def load_report_generator() -> ReportGenerator:
 
 
 def get_default_assets_dir() -> str:
-    return os.getenv("PNEUMO_ASSETS_DIR", str(Path(__file__).resolve().parent))
+    default_dir = Path(__file__).resolve().parent / "assets" / "baseline_lsmf"
+    return os.getenv("PNEUMO_ASSETS_DIR", str(default_dir))
 
 
 def render_sidebar() -> SidebarSettings:
@@ -238,6 +239,7 @@ def render_diagnosis_page(settings: SidebarSettings) -> None:
 
     pipeline = load_pipeline(settings.assets_dir)
     reporter = load_report_generator()
+    st.caption(f"Loaded model: {getattr(pipeline, 'variant_name', 'Unknown variant')}")
 
     left, right = st.columns([1.1, 1.4], gap="large")
 

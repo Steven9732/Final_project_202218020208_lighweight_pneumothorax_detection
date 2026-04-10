@@ -7,20 +7,20 @@ APP_SIDEBAR_STATE = "expanded"
 
 FINAL_MODEL_INFO = {
     "model_name": "ConvNeXtV2 + UNet++",
-    "innovation": "ECA-enhanced Lesion-Sensitive Multi-Scale Fusion (ECA-LSMF)",
+    "innovation": "Lesion-Sensitive Multi-Scale Fusion (LSMF)",
     "evaluation": "Temp+Threshold model",
-    "temperature": 0.716,
-    "threshold": 0.750,
+    "temperature": 0.930,
+    "threshold": 0.810,
 }
 
 FINAL_MODEL_METRICS = {
-    "Accuracy": 91.53526970954357,
-    "Precision": 79.15194346289752,
-    "Recall": 83.89513108614233,
-    "F1-Score": 81.45454545454545,
-    "Specificity": 93.71002132096258,
-    "ROC-AUC": 96.41120241489183,
-    "PR-AUC": 89.08149789724244,
+    "Accuracy": 92.03,
+    "Precision": 85.77,
+    "Recall": 76.78,
+    "F1-Score": 81.03,
+    "Specificity": 96.38,
+    "ROC-AUC": 96.24,
+    "PR-AUC": 89.72,
 }
 
 REPORT_HEADINGS = [
@@ -49,6 +49,7 @@ NAVIGATION_PAGES = [
 ]
 
 PERFORMANCE_IMAGE_DIR = "performance"
+PERFORMANCE_SUBDIR = "baseline_lsmf"
 
 ROC_CURVE_FILE = "roc_curve.png"
 PR_CURVE_FILE = "pr_curve.png"
