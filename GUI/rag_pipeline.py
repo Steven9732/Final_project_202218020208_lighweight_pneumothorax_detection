@@ -188,7 +188,11 @@ class PneumoRAGPipeline:
             lsmf_fuse_ch=256,
         )
 
+        self.model_kwargs = model_kwargs
+        self.variant_name = self._infer_variant_name(model_kwargs)
+
         self.model = ConvNeXtV2TinyScratch(**model_kwargs).to(self.device)
+
         state = (
             self.ckpt.get("model_state")
             or self.ckpt.get("model_state_dict")
@@ -197,17 +201,15 @@ class PneumoRAGPipeline:
         )
         if state is None:
             raise ValueError(f"No state dict found. Checkpoint keys: {list(self.ckpt.keys())}")
+
         if any(k.startswith("module.") for k in state.keys()):
             state = {k.replace("module.", "", 1): v for k, v in state.items()}
+
         self.model.load_state_dict(state, strict=False)
         self.model.eval()
 
-        target_layer = getattr(self.model, "eca4", None)
-        if target_layer is None:
-            raise RuntimeError(
-                "Grad-CAM target layer 'eca4' not found in current model."
-            )
-
+        target_layer, target_name = self._resolve_gradcam_target_layer()
+        self.gradcam_target_name = target_name
         self.gradcam = GradCAM(self.model, target_layer)
 
     def _init_retrieval(self):
@@ -349,8 +351,7 @@ class PneumoRAGPipeline:
             if "lsmf_vec" not in self.model.last_feats:
                 raise RuntimeError(
                     "lsmf_vec not found in self.model.last_feats. "
-                    "Please make sure the GUI is loading the LSMF+ECA model "
-                    "and the model is running with use_lsmf=True."
+                    "Please make sure the loaded checkpoint uses use_lsmf=True."
                 )
 
             emb = self.model.last_feats["lsmf_vec"]
@@ -471,9 +472,9 @@ class PneumoRAGPipeline:
             if self.YPRED_COL and self.YPRED_COL in hits_df.columns:
                 v = row[self.YPRED_COL]
                 try:
-                    item["pred_label"] = int(v)
+                    item["y_pred"] = int(v)
                 except Exception:
-                    item["pred_label"] = str(v)
+                    item["y_pred"] = str(v)
 
             if self.PCOL and self.PCOL in hits_df.columns:
                 v = row[self.PCOL]
@@ -861,3 +862,43 @@ class PneumoRAGPipeline:
                 ),
             },
         }
+    
+    def _infer_variant_name(self, model_kwargs: dict) -> str:
+        use_eca = bool(model_kwargs.get("use_eca", False))
+        use_lsmf = bool(model_kwargs.get("use_lsmf", False))
+
+        if use_eca and use_lsmf:
+            return "Baseline + ECA + LSMF"
+        if use_lsmf:
+            return "Baseline + LSMF"
+        if use_eca:
+            return "Baseline + ECA"
+        return "Baseline"
+    
+    def _resolve_gradcam_target_layer(self):
+        named = dict(self.model.named_modules())
+
+        preferred_names = [
+            "eca4",
+            "backbone.stages.3",
+            "stages.3",
+            "encoder.stages.3",
+            "stage4",
+        ]
+
+        for name in preferred_names:
+            if name in named:
+                return named[name], name
+
+        fallback = []
+        for n, m in named.items():
+            nl = n.lower()
+            if "stage4" in nl or n.endswith("stages.3"):
+                fallback.append((n, m))
+
+        if fallback:
+            return fallback[-1]
+
+        raise RuntimeError(
+            "No suitable Grad-CAM target layer found. Please inspect model.named_modules()."
+        )
