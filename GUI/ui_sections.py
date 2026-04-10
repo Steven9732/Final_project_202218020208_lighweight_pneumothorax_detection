@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+import pandas as pd
 import streamlit as st
 
 from ui_components import (
@@ -18,9 +19,8 @@ from ui_components import (
     render_report_sections,
 )
 from ui_constants import (
-    FINAL_MODEL_INFO,
-    FINAL_MODEL_METRICS,
-    PERFORMANCE_SUBDIR,
+    MODEL_VARIANTS,
+    DEFAULT_MODEL_VARIANT,
     ROC_CURVE_FILE,
     PR_CURVE_FILE,
     LOSS_CURVE_FILE,
@@ -28,7 +28,37 @@ from ui_constants import (
 )
 
 BASE_DIR = Path(__file__).resolve().parent
-PERFORMANCE_DIR = BASE_DIR / "performance" / PERFORMANCE_SUBDIR
+# PERFORMANCE_DIR = BASE_DIR / "performance" / PERFORMANCE_SUBDIR
+
+def get_variant_cfg(model_variant: str) -> dict[str, Any]:
+    return MODEL_VARIANTS.get(model_variant, MODEL_VARIANTS[DEFAULT_MODEL_VARIANT])
+
+
+def get_performance_dir(model_variant: str) -> Path:
+    cfg = get_variant_cfg(model_variant)
+    return BASE_DIR / "performance" / cfg["performance_subdir"]
+
+def render_variant_comparison_table() -> None:
+    rows = []
+    for key, cfg in MODEL_VARIANTS.items():
+        m = cfg["metrics"]
+        rows.append(
+            {
+                "Model Variant": cfg["label"],
+                "Accuracy": fmt_pct(m["Accuracy"]),
+                "Precision": fmt_pct(m["Precision"]),
+                "Recall": fmt_pct(m["Recall"]),
+                "F1-Score": fmt_pct(m["F1-Score"]),
+                "Specificity": fmt_pct(m["Specificity"]),
+                "ROC-AUC": fmt_pct(m["ROC-AUC"]),
+                "PR-AUC": fmt_pct(m["PR-AUC"]),
+                "Temperature": f"{cfg['temperature']:.3f}",
+                "Threshold": f"{cfg['threshold']:.3f}",
+            }
+        )
+
+    df = pd.DataFrame(rows)
+    st.dataframe(df, use_container_width=True, hide_index=True)
 
 def render_hero(page: str = "Diagnosis") -> None:
     subtitle_map = {
@@ -62,9 +92,10 @@ def render_disclaimer() -> None:
     )
 
 
-def render_model_performance_section() -> None:
-    info = FINAL_MODEL_INFO
-    metrics = FINAL_MODEL_METRICS
+def render_model_performance_section(model_variant: str) -> None:
+    cfg = get_variant_cfg(model_variant)
+    info = cfg
+    metrics = cfg["metrics"]
 
     st.markdown(
         f"""
@@ -72,7 +103,8 @@ def render_model_performance_section() -> None:
             <div class="perf-head-left">
                 <div class="perf-title">Model Performance</div>
                 <div class="perf-subtitle">
-                    <b>Final model:</b> {info['model_name']}<br>
+                    <b>Selected model:</b> {info['label']}<br>
+                    <b>Backbone:</b> {info['model_name']}<br>
                     <b>Innovation:</b> {info['innovation']}<br>
                     <b>Evaluation:</b> {info['evaluation']}
                 </div>
@@ -327,31 +359,33 @@ def render_image_if_exists(image_path: Path, empty_message: str) -> None:
     else:
         st.info(empty_message)
 
-def render_model_performance_page() -> None:
-    # st.markdown('<div class="section-title">Model Performance</div>', unsafe_allow_html=True)
+def render_model_performance_page(model_variant: str = DEFAULT_MODEL_VARIANT) -> None:
+    st.markdown("### Four-Variant Summary")
+    render_variant_comparison_table()
 
-    render_model_performance_section()
+    st.markdown("### Selected Variant Detail")
+    render_model_performance_section(model_variant)
 
     st.markdown("### Confusion Matrix")
-    render_curve_image("cm.png", "Confusion matrix image not found.")
+    render_curve_image("cm.png", "Confusion matrix image not found.", model_variant)
 
     st.markdown("### ROC Curve")
-    render_curve_image("roc_curve.png", "ROC curve image not found.")
+    render_curve_image("roc_curve.png", "ROC curve image not found.", model_variant)
 
     st.markdown("### PR Curve")
-    render_curve_image("pr_curve.png", "PR curve image not found.")
+    render_curve_image("pr_curve.png", "PR curve image not found.", model_variant)
 
-def render_training_dynamics_page() -> None:
+def render_training_dynamics_page(model_variant: str = DEFAULT_MODEL_VARIANT) -> None:
     st.markdown('<div class="section-title">Training Dynamics</div>', unsafe_allow_html=True)
 
     st.markdown("### Loss Curve")
-    render_curve_image("loss_curve.png", "Loss curve image not found.")
+    render_curve_image("loss_curve.png", "Loss curve image not found.", model_variant)
 
     st.markdown("### Learning Curve")
-    render_curve_image("learning_curve.png", "Learning curve image not found.")
+    render_curve_image("learning_curve.png", "Learning curve image not found.", model_variant)
 
-def render_curve_image(image_name: str, empty_message: str) -> None:
-    image_path = PERFORMANCE_DIR / image_name
+def render_curve_image(image_name: str, empty_message: str, model_variant: str) -> None:
+    image_path = get_performance_dir(model_variant) / image_name
 
     # st.caption(f"Looking for: {image_path}")
     if image_path.exists():
