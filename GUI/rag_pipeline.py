@@ -13,8 +13,10 @@ import torch.nn.functional as F
 import torchvision.transforms as tvT
 from PIL import Image, ImageDraw
 import matplotlib.cm as cm
+import inspect
 
 from ECALSMFModel import ConvNeXtV2TinyScratch
+from ui_constants import MODEL_VARIANTS
 
 try:
     import faiss  # type: ignore
@@ -114,10 +116,18 @@ class GradCAM:
 class PneumoRAGPipeline:
     def __init__(
         self,
+        variant_key: str,
         assets_dir: str | os.PathLike,
         report_dir: str | os.PathLike | None = None,
         device: str | None = None,
     ):
+        if variant_key not in MODEL_VARIANTS:
+            raise KeyError(f"Unknown variant_key: {variant_key}")
+
+        self.requested_variant_key = variant_key
+        self.variant_cfg = MODEL_VARIANTS[variant_key]
+        self.expected_embedding_dim = int(self.variant_cfg["embedding_dim"])
+        self.last_embedding_name = None
         self.assets_dir = Path(assets_dir)
         self.image_root = Path(
         os.getenv("PNEUMO_IMAGE_ROOT", r"C:\Users\Steven\Desktop\Final Project\Datasets\Dataset_1\Chest X-Ray Images with Pneumothorax Masks\png_images")
@@ -134,7 +144,19 @@ class PneumoRAGPipeline:
 
         self.meta = pd.read_csv(self.assets_dir / "rag_meta.csv").reset_index(drop=True)
         self.embs = np.load(self.assets_dir / "embeddings.npy").astype("float32")
-        assert len(self.meta) == self.embs.shape[0], "rag_meta.csv row count does not match embeddings.npy"
+
+        if len(self.meta) != self.embs.shape[0]:
+            raise ValueError("rag_meta.csv row count does not match embeddings.npy")
+
+        if self.embs.ndim != 2:
+            raise ValueError(f"embeddings.npy must be 2D, got shape={self.embs.shape}")
+
+        if self.embs.shape[1] != self.expected_embedding_dim:
+            raise ValueError(
+                f"Library embedding dim mismatch for {self.requested_variant_key}: "
+                f"expected {self.expected_embedding_dim}, got {self.embs.shape[1]}, "
+                f"path={self.assets_dir / 'embeddings.npy'}"
+            )
 
         with open(self.assets_dir / "checkpoint_infer.json", "r", encoding="utf-8") as f:
             self.cfg_json = json.load(f)
@@ -179,19 +201,47 @@ class PneumoRAGPipeline:
         )
 
     def _init_model(self):
-        model_kwargs = self.ckpt.get("model_kwargs", {}) or dict(
-            in_chans=1,
-            n_classes=1,
-            drop_path_rate=0.1,
-            use_seg_guided=False,
-            use_lsmf=True,
-            lsmf_fuse_ch=256,
-        )
+        raw_model_kwargs = dict(self.ckpt.get("model_kwargs", {}) or {})
 
-        self.model_kwargs = model_kwargs
-        self.variant_name = self._infer_variant_name(model_kwargs)
+        expected_use_eca = bool(self.variant_cfg["use_eca"])
+        expected_use_lsmf = bool(self.variant_cfg["use_lsmf"])
 
-        self.model = ConvNeXtV2TinyScratch(**model_kwargs).to(self.device)
+        ctor_sig = inspect.signature(ConvNeXtV2TinyScratch.__init__)
+        accepted_ctor_keys = {k for k in ctor_sig.parameters.keys() if k != "self"}
+
+        build_kwargs = {
+            k: v for k, v in raw_model_kwargs.items()
+            if k in accepted_ctor_keys
+        }
+
+        default_candidates = {
+            "in_chans": 1,
+            "n_classes": 1,
+            "drop_path_rate": 0.1,
+            "use_seg_guided": False,
+        }
+        for k, v in default_candidates.items():
+            if k in accepted_ctor_keys:
+                build_kwargs.setdefault(k, v)
+
+        if "use_eca" in accepted_ctor_keys:
+            build_kwargs["use_eca"] = expected_use_eca
+
+        if "use_lsmf" in accepted_ctor_keys:
+            build_kwargs["use_lsmf"] = expected_use_lsmf
+
+        if expected_use_lsmf and "lsmf_fuse_ch" in accepted_ctor_keys:
+            build_kwargs.setdefault("lsmf_fuse_ch", self.expected_embedding_dim)
+
+        self.model_kwargs = build_kwargs
+        self.variant_name = self.variant_cfg["label"]
+
+        # print("requested_variant_key:", self.requested_variant_key)
+        # print("accepted_ctor_keys:", sorted(list(accepted_ctor_keys)))
+        # print("raw_model_kwargs:", raw_model_kwargs)
+        # print("final build_kwargs:", build_kwargs)
+
+        self.model = ConvNeXtV2TinyScratch(**build_kwargs).to(self.device)
 
         state = (
             self.ckpt.get("model_state")
@@ -205,7 +255,10 @@ class PneumoRAGPipeline:
         if any(k.startswith("module.") for k in state.keys()):
             state = {k.replace("module.", "", 1): v for k, v in state.items()}
 
-        self.model.load_state_dict(state, strict=False)
+        load_result = self.model.load_state_dict(state, strict=False)
+        # print("missing_keys:", list(load_result.missing_keys))
+        # print("unexpected_keys:", list(load_result.unexpected_keys))
+
         self.model.eval()
 
         target_layer, target_name = self._resolve_gradcam_target_layer()
@@ -345,16 +398,7 @@ class PneumoRAGPipeline:
         with torch.no_grad():
             cls_logits, seg_logits = self.model(x)
 
-            if not hasattr(self.model, "last_feats"):
-                raise RuntimeError("self.model has no attribute 'last_feats'")
-
-            if "lsmf_vec" not in self.model.last_feats:
-                raise RuntimeError(
-                    "lsmf_vec not found in self.model.last_feats. "
-                    "Please make sure the loaded checkpoint uses use_lsmf=True."
-                )
-
-            emb = self.model.last_feats["lsmf_vec"]
+            emb, emb_name = self._resolve_embedding_tensor()
             logits = cls_logits.view(-1).float()
 
             p = torch.sigmoid(logits / float(self.T)).item()
@@ -364,11 +408,28 @@ class PneumoRAGPipeline:
             if emb_np.ndim == 1:
                 emb_np = emb_np[None, :]
 
-            if emb_np.shape[1] != self.embs.shape[1]:
+            query_dim = emb_np.shape[1]
+            library_dim = self.embs.shape[1]
+            expected_dim = self.expected_embedding_dim
+
+            if query_dim != expected_dim:
                 raise RuntimeError(
-                    f"Embedding dim mismatch: query D={emb_np.shape[1]} vs library D={self.embs.shape[1]}"
+                    f"Query embedding dim mismatch for {self.requested_variant_key}: "
+                    f"expected {expected_dim}, got {query_dim}, feature_key={emb_name}"
                 )
 
+            if library_dim != expected_dim:
+                raise RuntimeError(
+                    f"Library embedding dim mismatch for {self.requested_variant_key}: "
+                    f"expected {expected_dim}, got {library_dim}"
+                )
+
+            if query_dim != library_dim:
+                raise RuntimeError(
+                    f"Embedding dim mismatch: query D={query_dim} vs library D={library_dim} "
+                    f"(variant={self.requested_variant_key}, feature_key={emb_name})"
+                )
+            
             seg_prob = torch.sigmoid(seg_logits)[0, 0].detach().cpu().numpy()
 
         with torch.enable_grad():
@@ -468,7 +529,7 @@ class PneumoRAGPipeline:
                     item["label"] = int(v)
                 except Exception:
                     item["label"] = str(v)
-
+          
             if self.YPRED_COL and self.YPRED_COL in hits_df.columns:
                 v = row[self.YPRED_COL]
                 try:
@@ -899,6 +960,51 @@ class PneumoRAGPipeline:
         if fallback:
             return fallback[-1]
 
+        raise RuntimeError("No suitable Grad-CAM target layer found.")
+
+
+    def _resolve_embedding_tensor(self):
+        if not hasattr(self.model, "last_feats"):
+            raise RuntimeError("self.model has no attribute 'last_feats'")
+
+        feats = self.model.last_feats
+        if not isinstance(feats, dict):
+            raise RuntimeError("self.model.last_feats is not a dict")
+
+        expected_dim = int(self.expected_embedding_dim)
+        preferred_keys = list(self.variant_cfg.get("preferred_feat_keys", []))
+
+        for key in preferred_keys:
+            value = feats.get(key)
+            if isinstance(value, torch.Tensor) and value.ndim == 2 and value.shape[1] == expected_dim:
+                self.last_embedding_name = key
+                return value, key
+
+        matches = []
+        for key, value in feats.items():
+            if isinstance(value, torch.Tensor) and value.ndim == 2 and value.shape[1] == expected_dim:
+                matches.append((key, value))
+
+        if len(matches) == 1:
+            key, value = matches[0]
+            self.last_embedding_name = key
+            return value, key
+
+        tensor_shapes = {
+            key: tuple(value.shape)
+            for key, value in feats.items()
+            if isinstance(value, torch.Tensor)
+        }
+
+        if len(matches) > 1:
+            raise RuntimeError(
+                f"Multiple candidate embeddings found for {self.requested_variant_key} "
+                f"with expected dim={expected_dim}: {[k for k, _ in matches]}. "
+                f"Available last_feats tensor shapes: {tensor_shapes}"
+            )
+
         raise RuntimeError(
-            "No suitable Grad-CAM target layer found. Please inspect model.named_modules()."
+            f"No suitable embedding tensor found for {self.requested_variant_key}. "
+            f"Expected dim={expected_dim}. "
+            f"Available last_feats tensor shapes: {tensor_shapes}"
         )

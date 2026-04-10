@@ -16,6 +16,8 @@ from ui_constants import (
     APP_SIDEBAR_STATE,
     APP_TITLE,
     NAVIGATION_PAGES,
+    MODEL_VARIANTS,
+    DEFAULT_MODEL_VARIANT,
 )
 from ui_sections import (
     render_disclaimer,
@@ -43,7 +45,8 @@ st.set_page_config(
 @dataclass(slots=True)
 class SidebarSettings:
     page: str
-    assets_dir: str
+    model_variant: str
+    assets_root_dir: str
     topk_img: int
     topk_text: int
     save_report: bool
@@ -52,8 +55,8 @@ class SidebarSettings:
 
 
 @st.cache_resource(show_spinner=False)
-def load_pipeline(assets_dir: str) -> PneumoRAGPipeline:
-    return PneumoRAGPipeline(assets_dir=assets_dir)
+def load_pipeline(variant_key: str, assets_dir: str) -> PneumoRAGPipeline:
+    return PneumoRAGPipeline(variant_key=variant_key, assets_dir=assets_dir)
 
 
 @st.cache_resource(show_spinner=False)
@@ -61,13 +64,16 @@ def load_report_generator() -> ReportGenerator:
     return ReportGenerator()
 
 
-def get_default_assets_dir() -> str:
-    default_dir = Path(__file__).resolve().parent / "assets" / "baseline_lsmf"
-    return os.getenv("PNEUMO_ASSETS_DIR", str(default_dir))
+def get_default_assets_root_dir() -> str:
+    default_root = Path(__file__).resolve().parent / "assets"
+    return os.getenv("PNEUMO_ASSETS_ROOT", str(default_root))
 
+def resolve_assets_dir(settings: SidebarSettings) -> str:
+    variant_cfg = MODEL_VARIANTS[settings.model_variant]
+    return str(Path(settings.assets_root_dir) / variant_cfg["assets_subdir"])
 
 def render_sidebar() -> SidebarSettings:
-    default_assets = get_default_assets_dir()
+    default_assets_root = get_default_assets_root_dir()
 
     with st.sidebar:
         st.markdown("## PneumoAssist")
@@ -79,8 +85,18 @@ def render_sidebar() -> SidebarSettings:
             index=0,
         )
 
+        variant_keys = list(MODEL_VARIANTS.keys())
+        default_idx = variant_keys.index(DEFAULT_MODEL_VARIANT)
+
+        model_variant = st.selectbox(
+            "Model variant",
+            options=variant_keys,
+            index=default_idx,
+            format_func=lambda k: MODEL_VARIANTS[k]["label"],
+        )
+
         with st.expander("Advanced Settings", expanded=False):
-            assets_dir = st.text_input("Assets directory", value=default_assets)
+            assets_root_dir = st.text_input("Assets root directory", value=default_assets_root)
             topk_img = st.slider("Top-k image retrieval", min_value=3, max_value=10, value=5, step=1)
             topk_text = st.slider("Top-k text evidence", min_value=3, max_value=6, value=6, step=1)
             save_report = st.toggle("Save report JSON", value=True)
@@ -89,7 +105,8 @@ def render_sidebar() -> SidebarSettings:
 
     return SidebarSettings(
         page=page,
-        assets_dir=assets_dir,
+        model_variant=model_variant,
+        assets_root_dir=assets_root_dir,
         topk_img=topk_img,
         topk_text=topk_text,
         save_report=save_report,
@@ -199,6 +216,7 @@ def render_tabs(
     out_path: str | None,
     uploaded_name: str,
     settings: SidebarSettings,
+    assets_dir: str,
     used_chunk_ids: list[str],
     used_case_ids: list[str],
     prompt_debug: dict,
@@ -217,7 +235,8 @@ def render_tabs(
     with tabs[1]:
         render_rag_overview_tab(payload, report)
     with tabs[2]:
-        render_image_retrieval_tab(payload, used_case_ids=used_case_ids, assets_dir=settings.assets_dir)
+        # render_image_retrieval_tab(payload, used_case_ids=used_case_ids, assets_dir=settings.assets_dir)
+        render_image_retrieval_tab(payload, used_case_ids=used_case_ids, assets_dir=assets_dir)
     with tabs[3]:
         render_text_evidence_tab(payload, used_chunk_ids=used_chunk_ids)
     with tabs[4]:
@@ -233,13 +252,28 @@ def render_tabs(
 
 
 def render_diagnosis_page(settings: SidebarSettings) -> None:
-    if not Path(settings.assets_dir).exists():
-        st.error(f"Assets directory not found: {settings.assets_dir}")
+    assets_dir = resolve_assets_dir(settings)
+
+    if not Path(assets_dir).exists():
+        st.error(f"Assets directory not found: {assets_dir}")
         st.stop()
 
-    pipeline = load_pipeline(settings.assets_dir)
+    pipeline = load_pipeline(settings.model_variant, assets_dir)
     reporter = load_report_generator()
-    st.caption(f"Loaded model: {getattr(pipeline, 'variant_name', 'Unknown variant')}")
+
+    requested_cfg = MODEL_VARIANTS[settings.model_variant]
+
+    # st.caption(f"Requested variant key: {settings.model_variant}")
+    # st.caption(f"Requested label: {requested_cfg['label']}")
+    # st.caption(f"Resolved assets_dir: {assets_dir}")
+    # st.caption(f"Pipeline requested variant: {getattr(pipeline, 'requested_variant_key', 'unknown')}")
+    # st.caption(f"Checkpoint-inferred variant: {getattr(pipeline, 'variant_name', 'unknown')}")
+    # st.caption(f"Expected embedding dim: {getattr(pipeline, 'expected_embedding_dim', 'unknown')}")
+    # st.caption(
+    #     f"Library embedding shape: "
+    #     f"{getattr(pipeline, 'embs', None).shape if hasattr(pipeline, 'embs') else 'N/A'}"
+    # )
+    # st.caption(f"Loaded model: {getattr(pipeline, 'variant_name', 'Unknown variant')}")
 
     left, right = st.columns([1.1, 1.4], gap="large")
 
@@ -267,11 +301,12 @@ def render_diagnosis_page(settings: SidebarSettings) -> None:
         out_path=out_path,
         uploaded_name=uploaded.name,
         settings=settings,
+        assets_dir=assets_dir,
         used_chunk_ids=used_chunk_ids,
         used_case_ids=used_case_ids,
         prompt_debug=prompt_debug,
     )
-
+    
 def main() -> None:
     inject_css()
 
@@ -283,11 +318,10 @@ def main() -> None:
         render_diagnosis_page(settings)
 
     elif settings.page == "Model Performance":
-        render_model_performance_page()
+        render_model_performance_page(settings.model_variant)
 
     elif settings.page == "Training Dynamics":
-        render_training_dynamics_page()
-
+        render_training_dynamics_page(settings.model_variant)
 
 if __name__ == "__main__":
     main()
