@@ -143,10 +143,10 @@ CASE_IMAGE_KEYS = [
 NAVIGATION_PAGES = [
     "Diagnosis",
     "Model Performance",
-    "Training Dynamics",
+    # "Training Dynamics",
 ]
 
 ROC_CURVE_FILE = "roc_curve.png"
 PR_CURVE_FILE = "pr_curve.png"
 LOSS_CURVE_FILE = "loss_curve.png"
-LEARNING_CURVE_FILE = "learning_curve.png"
+# LEARNING_CURVE_FILE = "learning_curve.png"

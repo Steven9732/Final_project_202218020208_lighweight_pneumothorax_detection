@@ -29,7 +29,7 @@ from ui_sections import (
     render_rag_overview_tab,
     render_structured_report_tab,
     render_text_evidence_tab,
-    render_training_dynamics_page,
+    # render_training_dynamics_page,
 )
 from ui_styles import inject_css
 
@@ -320,8 +320,8 @@ def main() -> None:
     elif settings.page == "Model Performance":
         render_model_performance_page(settings.model_variant)
 
-    elif settings.page == "Training Dynamics":
-        render_training_dynamics_page(settings.model_variant)
+    # elif settings.page == "Training Dynamics":
+    #     render_training_dynamics_page(settings.model_variant)
 
 if __name__ == "__main__":
     main()

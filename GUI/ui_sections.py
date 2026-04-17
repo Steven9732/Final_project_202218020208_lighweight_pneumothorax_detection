@@ -21,10 +21,10 @@ from ui_components import (
 from ui_constants import (
     MODEL_VARIANTS,
     DEFAULT_MODEL_VARIANT,
-    ROC_CURVE_FILE,
-    PR_CURVE_FILE,
-    LOSS_CURVE_FILE,
-    LEARNING_CURVE_FILE,
+    # ROC_CURVE_FILE,
+    # PR_CURVE_FILE,
+    # LOSS_CURVE_FILE,
+    # LEARNING_CURVE_FILE,
 )
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -63,8 +63,7 @@ def render_variant_comparison_table() -> None:
 def render_hero(page: str = "Diagnosis") -> None:
     subtitle_map = {
         "Diagnosis": "Upload chest X-ray images and generate calibrated prediction, explainability, and structured report.",
-        "Model Performance": "Review summary metrics together with ROC and PR analysis for the final calibrated model.",
-        "Training Dynamics": "Inspect convergence behaviour, loss trend, and learning stability across training.",
+        "Model Performance": "Review summary metrics and performance curves for the final calibrated model.",
     }
 
     st.markdown(
@@ -375,14 +374,17 @@ def render_model_performance_page(model_variant: str = DEFAULT_MODEL_VARIANT) ->
     st.markdown("### PR Curve")
     render_curve_image("pr_curve.png", "PR curve image not found.", model_variant)
 
-def render_training_dynamics_page(model_variant: str = DEFAULT_MODEL_VARIANT) -> None:
-    st.markdown('<div class="section-title">Training Dynamics</div>', unsafe_allow_html=True)
-
     st.markdown("### Loss Curve")
     render_curve_image("loss_curve.png", "Loss curve image not found.", model_variant)
 
-    st.markdown("### Learning Curve")
-    render_curve_image("learning_curve.png", "Learning curve image not found.", model_variant)
+# def render_training_dynamics_page(model_variant: str = DEFAULT_MODEL_VARIANT) -> None:
+#     st.markdown('<div class="section-title">Training Dynamics</div>', unsafe_allow_html=True)
+
+#     st.markdown("### Loss Curve")
+#     render_curve_image("loss_curve.png", "Loss curve image not found.", model_variant)
+
+#     st.markdown("### Learning Curve")
+#     render_curve_image("learning_curve.png", "Learning curve image not found.", model_variant)
 
 def render_curve_image(image_name: str, empty_message: str, model_variant: str) -> None:
     image_path = get_performance_dir(model_variant) / image_name
