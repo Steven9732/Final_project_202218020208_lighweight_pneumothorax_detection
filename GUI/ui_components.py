@@ -196,7 +196,7 @@ def render_gradcam_panel(gradcam_overlay_path: str | None, note: str = "") -> No
     if not overlay.exists():
         return
 
-    st.markdown('<div class="section-title">Model Explainability</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">Grad-CAM</div>', unsafe_allow_html=True)
     st.image(str(overlay), use_container_width=True)
     if note:
         st.caption(note)

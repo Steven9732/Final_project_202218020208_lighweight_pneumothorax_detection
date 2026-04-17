@@ -1,0 +1,20 @@
+{
+  "task": "pneumothorax_binary_classification",
+  "report_constraints": {
+    "allow_localization": false,
+    "allow_laterality": false,
+    "allow_size": false,
+    "allow_extent": false,
+    "allow_tension": false,
+    "allow_specific_imaging_signs": false
+  },
+  "system_prompt_rules_source": "report_generator.py SYSTEM + payload.report_constraints",
+  "notes": {
+    "allow_localization": false,
+    "allow_laterality": false,
+    "allow_size": false,
+    "allow_extent": false,
+    "allow_tension": false,
+    "allow_specific_imaging_signs": false
+  }
+}

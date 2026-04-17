@@ -1,0 +1,60 @@
+================================================================================
+selected_role: TP
+case_role: TP
+case_id: 1.2.276.0.7230010.3.1.4.8323329.4569.1517875183.532479
+p_calibrated: 0.970535
+report_evidence_ok: True
+unsupported_claim: False
+rule_adherent: True
+fail_safe: False
+diagnostic_report:
+Clinical context: AI-assisted chest X-ray pneumothorax screening. Technique: Image-based automated classification output with retrieval-supported wording constraints. Findings: Automated screening output is suggestive of pneumothorax. Impression: Suggestive of pneumothorax on this automated screening result, pending qualified human review. Recommendations: Recommend radiologist review and correlation with the full clinical context. Limitations: This output is classification-only and does not provide laterality, localization, size, extent, pleural line assessment, collapse assessment, or tension assessment.
+
+================================================================================
+selected_role: TN
+case_role: TN
+case_id: 1.2.276.0.7230010.3.1.4.8323329.514.1517875163.270253
+p_calibrated: 0.019955
+report_evidence_ok: True
+unsupported_claim: False
+rule_adherent: True
+fail_safe: False
+diagnostic_report:
+Clinical context: AI-assisted chest X-ray pneumothorax screening. Technique: Image-based automated classification output with retrieval-supported wording constraints. Findings: Automated screening output is not suggestive of pneumothorax. Impression: Not suggestive of pneumothorax on this automated screening result, with continued need for human review. Recommendations: Recommend radiologist review and correlation with the full clinical context. Limitations: This output is classification-only and does not provide laterality, localization, size, extent, pleural line assessment, collapse assessment, or tension assessment.
+
+================================================================================
+selected_role: FP
+case_role: FP
+case_id: 1.2.276.0.7230010.3.1.4.8323329.5731.1517875189.855372
+p_calibrated: 0.958150
+report_evidence_ok: True
+unsupported_claim: False
+rule_adherent: True
+fail_safe: False
+diagnostic_report:
+Clinical context: AI-assisted chest X-ray pneumothorax screening. Technique: Image-based automated classification output with retrieval-supported wording constraints. Findings: Automated screening output is suggestive of pneumothorax. Impression: Suggestive of pneumothorax on this automated screening result, pending qualified human review. Recommendations: Recommend radiologist review and correlation with the full clinical context. Limitations: This output is classification-only and does not provide laterality, localization, size, extent, pleural line assessment, collapse assessment, or tension assessment.
+
+================================================================================
+selected_role: FN
+case_role: FN
+case_id: 1.2.276.0.7230010.3.1.4.8323329.12856.1517875242.202753
+p_calibrated: 0.031182
+report_evidence_ok: True
+unsupported_claim: False
+rule_adherent: True
+fail_safe: False
+diagnostic_report:
+Clinical context: AI-assisted chest X-ray pneumothorax screening. Technique: Image-based automated classification output with retrieval-supported wording constraints. Findings: Automated screening output is not suggestive of pneumothorax. Impression: Not suggestive of pneumothorax on this automated screening result, with continued need for human review. Recommendations: Recommend radiologist review and correlation with the full clinical context. Limitations: This output is classification-only and does not provide laterality, localization, size, extent, pleural line assessment, collapse assessment, or tension assessment.
+
+================================================================================
+selected_role: Borderline
+case_role: FN
+case_id: 1.2.276.0.7230010.3.1.4.8323329.3155.1517875176.356160
+p_calibrated: 0.800502
+report_evidence_ok: True
+unsupported_claim: False
+rule_adherent: True
+fail_safe: False
+diagnostic_report:
+Clinical context: AI-assisted chest X-ray pneumothorax screening. Technique: Image-based automated classification output with retrieval-supported wording constraints. Findings: Automated screening output is near the decision boundary and should be treated as indeterminate. Impression: Indeterminate automated screening result. Recommendations: Prioritise human review and do not use this output alone. Limitations: This output is classification-only and does not provide laterality, localization, size, extent, pleural line assessment, collapse assessment, or tension assessment.
+
